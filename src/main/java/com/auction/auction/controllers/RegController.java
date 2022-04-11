@@ -9,7 +9,7 @@ public class RegController {
 
     @GetMapping("/auction")
     public String auction(Model model) {
-        return "wellCUM";
+        return "start";
     }
 
     @GetMapping("/auction/regestration")
