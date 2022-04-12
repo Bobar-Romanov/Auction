@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link th:href="@{/css/styleslogOn.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="banner"></div>
+<h1 align="center">Вход</h1>
+
+<form action="/auction" method="post">
+
+    <input name = "${_csrf.parameterName}" value = "${_csrf.token}" type = "hidden">
+    <div class="group1">
+        <label for="email"><b>Email:</b></label>
+        <input type="email" placeholder="email" name="email" id="email" required>
+    </div>
+
+    <div class="group1">
+        <label for="password"><b>Password:</b></label>
+        <input type="password" placeholder="password" name="password" id="password" required>
+    </div>
+
+    <div class="group1">
+        <center><button type="submit" class="registerbtn">Войти</button></center>
+    </div>
+
+    <div class="signin1">
+        <p align="center">Еще нет учетной записи?<a href="/auction/registration">Зарегистрироваться</a></p>
+    </div>
+
+
+</form>
+
+</body>
+</html>

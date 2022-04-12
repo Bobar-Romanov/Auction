@@ -9,21 +9,21 @@
 <body>
 <div class="banner"></div>
 <h1 align="center">Регистрация</h1>
-    <form action="action_page.php">
+    <form action="/auction/registration" method="post">
 
         <div class="group">
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="email" id="email" required>
+            <input type="email" placeholder="email" name="email" id="email" required>
         </div>
 
         <div class="group">
             <label for="nickname"><b>Nickname:</b></label>
-            <input type="text" placeholder="nickname" id="nickname" required>
+            <input type="text" placeholder="nickname" name="username" id="nickname" required>
         </div>
 
         <div class="group">
             <label for="password"><b>Password:</b></label>
-            <input type="password" placeholder="password" id="password" required>
+            <input type="password" placeholder="password" name="password" id="password" required>
         </div>
 
         <div class="group">
@@ -31,7 +31,7 @@
         </div>
 
         <div class="signin">
-            <p align="center">Уже есть учетная запись?<a href="#">Войти</a></p>
+            <p align="center">Уже есть учетная запись?<a href="/auction">Войти</a></p>
         </div>
     </form>
 </body>
