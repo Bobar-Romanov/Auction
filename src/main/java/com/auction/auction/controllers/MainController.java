@@ -18,5 +18,10 @@ public class MainController {
         model.addAttribute("name", "Ивак");
         return "homePage";
     }
+    @GetMapping("/auction/test")
+    public String test(Model model) {
+
+        return "test";
+    }
 
 }

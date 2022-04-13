@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Вход</title>
-    <link th:href="@{/css/styleslogOn.css}" rel="stylesheet" />
+    <link th:href="@{/css/styleslogOn.css}" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/css; charset=UTF-8" />
 </head>
 <body>
 
 <div class="banner"></div>
 <h1 align="center">Вход</h1>
 
-<form action="/auction" method="post">
+    <div class="group1">
+         <p th:text="${error}" > </p>
+         <p th:text="${logout}"> </p>
+    </div>
 
-    <input name = "${_csrf.parameterName}" value = "${_csrf.token}" type = "hidden">
+<form  method="post">
+
+    <!-- <input name = "${_csrf.parameterName}" value = "${_csrf.token}" type = "hidden"> -->
     <div class="group1">
         <label for="email"><b>Email:</b></label>
         <input type="email" placeholder="email" name="email" id="email" required>
@@ -29,7 +35,7 @@
     </div>
 
     <div class="signin1">
-        <p align="center">Еще нет учетной записи?<a href="/auction/registration">Зарегистрироваться</a></p>
+        <p align="center">Еще нет учетной записи? <a href="/auction/registration">Зарегистрироваться</a></p>
     </div>
 
 

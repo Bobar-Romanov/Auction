@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.auction.auction.service.UserService;
 
@@ -20,11 +21,22 @@ public class RegController {
         return "login";
     }
 
+    @RequestMapping("/auction")
+    public String getLogin(@RequestParam(value = "error", required = false) String error,
+                           @RequestParam(value = "logout", required = false) String logout,
+                            Model model) {
+        model.addAttribute("error", error != null);
+        System.out.println(error);
+        System.out.println("zxc");
+        model.addAttribute("logout", logout != null);
+        System.out.println(logout);
+        return "login";
+    }
 
 
 
     @GetMapping("/auction/registration")
-    public String registration(Model model)
+    public String registration()
     {
         return "registration";
     }
