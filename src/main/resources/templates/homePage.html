@@ -6,7 +6,39 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
     <body>
+    <form>
+
+        <div class="header">
+            <div class="header1">
+                <form action="search">
+                    <input type="text"  placeholder="search" name="search" id="search">
+                    <input type="submit" value>
+                </form>
+
+
+
+                <a href="/logout"> ЛИВАЮ НАХУЙ </a>
+            </div>
+        </div>
+
+        <div class="panel">
+            <li>
+                <a href="">1</a>
+            </li>
+
+            <li>
+                <a href="">2</a>
+            </li>
+
+            <li>
+                <a href="">3</a>
+            </li>
+
+            <li>
+                <a href="">4</a>
+            </li>
+        </div>
+    </form>
         <p th:text="'Hello, ' + ${#httpServletRequest.remoteUser} + '!'" />
-        <a href="/logout"> ЛИВАЮ НАХУЙ </a>
     </body>
 </html>
