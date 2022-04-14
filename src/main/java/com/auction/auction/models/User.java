@@ -18,6 +18,7 @@ public class User implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private boolean activated;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -26,10 +27,19 @@ public class User implements UserDetails {
         this.username = nick;
         this.email = email;
         this.password = pass;
+        this.activated = false;
     }
 
     public User() {
 
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public Long getId() {
