@@ -10,16 +10,12 @@
 <body>
 
 <div class="banner"></div>
+
 <h1 align="center">Вход</h1>
 
-
-
-    <div th:if ="${#request.getParameter('error')}" >
-            ERORRRRRRRREE!!!
-    </div>
-    <div th:if ="${#request.getParameter('logout')}" >
-            LOOOGOUUUUT!!!
-    </div>
+<div class="lorGout" th:if ="${#request.getParameter('logout')}" >
+    LOOOGOUUUUT!!!
+</div>
 
 <form action="/auction" method="post">
 
@@ -36,6 +32,10 @@
 
     <div class="group1">
         <center><button type="submit" class="registerbtn">Войти</button></center>
+    </div>
+
+    <div class="Err" th:if ="${#request.getParameter('error')}" >
+        ERORRRRRRRREE!!!
     </div>
 
     <div class="signin1">
