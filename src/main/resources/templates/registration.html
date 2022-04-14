@@ -13,12 +13,14 @@
 
         <div class="group">
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="email" name="email" id="email" required>
+            <input type="email" placeholder="email" name="email" id="email" th:value="${email}" required>
+            <pre th:text="${emailError}" class="error"></pre>
         </div>
 
         <div class="group">
             <label for="nickname"><b>Nickname:</b></label>
-            <input type="text" placeholder="nickname" name="username" id="nickname" required>
+            <input type="text" placeholder="nickname" name="username" id="nickname" th:value="${username}" required>
+            <pre th:text="${nameError}" class="error"></pre>
         </div>
 
         <div class="group">

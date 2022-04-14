@@ -12,14 +12,18 @@
 <div class="banner"></div>
 <h1 align="center">Вход</h1>
 
-    <div class="group1">
-         <p th:text="${error}" > </p>
-         <p th:text="${logout}"> </p>
+
+
+    <div th:if ="${#request.getParameter('error')}" >
+            ERORRRRRRRREE!!!
+    </div>
+    <div th:if ="${#request.getParameter('logout')}" >
+            LOOOGOUUUUT!!!
     </div>
 
-<form  method="post">
+<form action="/auction" method="post">
 
-    <!-- <input name = "${_csrf.parameterName}" value = "${_csrf.token}" type = "hidden"> -->
+
     <div class="group1">
         <label for="email"><b>Email:</b></label>
         <input type="email" placeholder="email" name="email" id="email" required>

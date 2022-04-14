@@ -6,7 +6,7 @@
     <link th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
     <body>
-        <p th:text="'Hello, ' + ${name} + '!'" />
+        <p th:text="'Hello, ' + ${#httpServletRequest.remoteUser} + '!'" />
         <a href="/logout"> ЛИВАЮ НАХУЙ </a>
     </body>
 </html>

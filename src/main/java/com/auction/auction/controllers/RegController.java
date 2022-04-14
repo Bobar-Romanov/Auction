@@ -1,6 +1,7 @@
 package com.auction.auction.controllers;
 
 import com.auction.auction.models.User;
+import com.auction.auction.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,22 +17,15 @@ public class RegController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepo userRepo;
+
     @GetMapping("/auction")
     public String auction(Model model) {
         return "login";
     }
 
-    @RequestMapping("/auction")
-    public String getLogin(@RequestParam(value = "error", required = false) String error,
-                           @RequestParam(value = "logout", required = false) String logout,
-                            Model model) {
-        model.addAttribute("error", error != null);
-        System.out.println(error);
-        System.out.println("zxc");
-        model.addAttribute("logout", logout != null);
-        System.out.println(logout);
-        return "login";
-    }
+
 
 
 
@@ -46,11 +40,22 @@ public class RegController {
 
         User user = new User(username, email, password);
 
-        if (!userService.saveUser(user)){
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+        if(userRepo.existsByEmail(email)){
+            model.addAttribute("emailError", "Данный email адрес уже зарегистрирован");
+            model.addAttribute("email", email);
+            model.addAttribute("username", username);
+            return "registration";
+        }
+        if(userRepo.existsByUsername(username)){
+            model.addAttribute("nameError", "Пользователь с таким именем уже существует");
+            model.addAttribute("email", email);
+            model.addAttribute("username", username);
             return "registration";
         }
 
-        return "redirect:/";
+        if (!userService.saveUser(user)){
+            return "registration";
+        }
+        return "redirect:/auction";
     }
 }
