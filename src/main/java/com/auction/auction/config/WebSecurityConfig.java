@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/css/*", "/js/*").permitAll()
-                .antMatchers("/auction/registration", "/auction ").not().fullyAuthenticated()
+                .antMatchers("/auction/registration", "/auction ", "/activate/*").not().fullyAuthenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -59,7 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userService)
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+                //.passwordEncoder(bCryptPasswordEncoder());
 
     }
 

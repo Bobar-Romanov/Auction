@@ -1,5 +1,6 @@
 package com.auction.auction.service;
 
+import antlr.StringUtils;
 import com.auction.auction.models.Role;
 import com.auction.auction.models.User;
 import com.auction.auction.repo.RoleRepo;
@@ -17,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -28,6 +30,8 @@ public class UserService implements UserDetailsService {
     RoleRepo roleRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    MailSender mailSender;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -58,8 +62,20 @@ public class UserService implements UserDetailsService {
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
+
+        String message = String.format(
+                "Ммм свежее мясо!, %s \n" +
+                        "Для активации аккаунта перейдите по ссылке: http://localhost/activate/%s",
+                user.getUsername(),
+                user.getActivationCode()
+        );
+
+        mailSender.RegSend(user.getEmail(), "Account activation", message);
+
         return true;
     }
 
@@ -71,4 +87,15 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+    public boolean activateUser(String code) {
+        User user = userRepository.findByActivationCode(code);
+        if(user == null){
+            return false;
+        }
+        user.setActivationCode(null);
+        user.setActivated(true);
+        userRepository.save(user);
+
+        return true;
+    }
 }
