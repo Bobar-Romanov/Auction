@@ -1,0 +1,16 @@
+.sendBox{
+
+
+    margin: 0 auto;
+    margin-top: 250px;
+    font-family: "Lucida bright";
+    border-radius: 16px/16px;
+    background: aliceblue;
+    height: 50px;
+    width: 440px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
