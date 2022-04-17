@@ -5,10 +5,7 @@ import com.auction.auction.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.auction.auction.service.UserService;
 
 @Controller
@@ -24,9 +21,6 @@ public class RegController {
     public String auction(Model model) {
         return "login";
     }
-
-
-
 
 
     @GetMapping("/auction/registration")
@@ -57,5 +51,16 @@ public class RegController {
             return "registration";
         }
         return "redirect:/auction";
+    }
+
+    @GetMapping("/activate/{code}")
+    public String activate(Model model, @PathVariable String code){
+        boolean isActived = userService.activateUser(code);
+        if(isActived){
+            model.addAttribute("message","Активация прошла успешно!");
+        } else {
+            model.addAttribute("message","Что-то пошло не так...");
+        }
+        return "login";
     }
 }

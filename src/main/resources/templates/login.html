@@ -14,7 +14,7 @@
 <h1 align="center">Вход</h1>
 
 <div class="loGout" th:if ="${#request.getParameter('logout')}" >
-    LOOOGOUUUUT!!!
+   Вы вышли из аккаунта
 </div>
 
 <form action="/auction" method="post">
@@ -35,7 +35,7 @@
     </div>
 
     <div class="Err" th:if ="${#request.getParameter('error')}" >
-        ERORRRRRRRREE!!!
+        Неправильно указан Email и/или пароль
     </div>
 
     <div class="signin1">

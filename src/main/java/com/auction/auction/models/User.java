@@ -19,6 +19,15 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private boolean activated;
+    private String activationCode;
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
