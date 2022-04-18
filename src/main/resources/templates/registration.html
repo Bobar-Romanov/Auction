@@ -19,22 +19,25 @@
 
         <div class="group">
             <label for="nickname"><b>Nickname:</b></label>
-            <input type="text" placeholder="nickname" name="username" id="nickname" th:value="${username}" required>
-            <pre th:text="${nameError}" class="error"></pre>
+            <input type="text" placeholder="nickname" name="username" id="nickname" th:value="${username}"
+                   onblur="checkLog()" required>
+            <pre th:text="${nameError}" class="error" id = "logError"></pre>
         </div>
 
         <div class="group">
             <label for="password"><b>Password:</b></label>
-            <input type="password" placeholder="password" name="password" id="password" required>
+            <input type="password" placeholder="password" name="password" id="password" onblur="checkPass()" required>
+            <pre  id = "passError" class="error"></pre>
         </div>
 
         <div class="group">
-            <center><button type="submit" class="registerbtn">Зарегистрироваться</button></center>
+            <center><button type="submit" class="registerbtn" id="regbutton">Зарегистрироваться</button></center>
         </div>
 
         <div class="signin">
             <p align="center">Уже есть учетная запись?<a href="/auction">Войти</a></p>
         </div>
     </form>
+    <script src="/js/registration.js"></script>
 </body>
 </html>

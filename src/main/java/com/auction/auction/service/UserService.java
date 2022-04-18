@@ -69,7 +69,7 @@ public class UserService implements UserDetailsService {
 
         String message = String.format(
                 "Ммм свежее мясо!, %s \n" +
-                        "Для активации аккаунта перейдите по ссылке: http://localhost/activate/%s",
+                        "Для активации аккаунта перейдите по ссылке: http://localhost:8080/activate/%s",
                 user.getUsername(),
                 user.getActivationCode()
         );
