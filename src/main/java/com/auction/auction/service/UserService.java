@@ -68,13 +68,13 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         String message = String.format(
-                "Ммм свежее мясо!, %s \n" +
+                "Ммм свежее мясо! %s \n" +
                         "Для активации аккаунта перейдите по ссылке: http://localhost:8080/activate/%s",
                 user.getUsername(),
                 user.getActivationCode()
         );
 
-        mailSender.RegSend(user.getEmail(), "Account activation", message);
+        mailSender.Send(user.getEmail(), "Account activation", message);
 
         return true;
     }
