@@ -1,0 +1,18 @@
+<div th:fragment = "menu">
+    <div class="menu">
+        <ul >
+            <li class="left" ><a href="/auction/home">Главная</a></li>
+            <li class="left" ><a href="/auction/home/add">Добавить лот</a></li>
+            <li class="left" ><a href="#">Избранное</a></li>
+            <li class="left" >
+                <form action="/auction/home" method="post" class="search">
+                    <input name="s" placeholder="Искать здесь..." type="search">
+                    <button type="submit">Поиск</button>
+                </form>
+            </li>
+            <li class="right" ><a href="#">Профиль</a></li>
+            <li class="right" ><pre th:text = "${#httpServletRequest.remoteUser}"></pre></li>
+            <li class="right" ><a href="/logout"> ЛИВАЮ НАХУЙ </a></li>
+        </ul>
+    </div>
+</div>

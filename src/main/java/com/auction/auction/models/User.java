@@ -18,6 +18,7 @@ public class User implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private int balance;
     private boolean activated;
     private String activationCode;
 
@@ -32,10 +33,23 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void decBalance(int value) {
+        this.balance -= value;
+    }
+
     public User(String nick, String email, String pass) {
         this.username = nick;
         this.email = email;
         this.password = pass;
+        this.balance = 993;
         this.activated = false;
     }
 

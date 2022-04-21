@@ -21,10 +21,9 @@ public class MainController {
         model.addAttribute("name", "lol");
         return "homePage";
     }
-    @GetMapping("/auction/test")
-    public String test(Model model) {
-
-        return "test";
+    @GetMapping("/auction/home/add")
+    public String addLot() {
+        return "addLot";
     }
 
 }
