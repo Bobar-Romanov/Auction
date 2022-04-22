@@ -72,7 +72,7 @@ public class MainController {
         ArrayList<Lot> res = new ArrayList<>();
         blog.ifPresent(res::add);
         model.addAttribute("lot", res);
-        return "lot";
+        return "currentLot";
     }
 
 }

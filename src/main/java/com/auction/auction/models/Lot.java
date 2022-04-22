@@ -22,8 +22,18 @@ public class Lot {
 
     private int currentPrice, redemptionPrice;
 
-    private String owner;
+    private String owner, currentOwner;
     private String mainImg;
+
+    private LocalDateTime startDate, endDate;
+
+    public String getCurrentOwner() {
+        return currentOwner;
+    }
+
+    public void setCurrentOwner(String currentOwner) {
+        this.currentOwner = currentOwner;
+    }
 
     public String getMainImg() {
         return mainImg;
@@ -33,7 +43,7 @@ public class Lot {
         this.mainImg = mainImg;
     }
 
-    private LocalDateTime startDate, endDate;
+
 
     public Lot(String name, String description, int currentPrice, int redemptionPrice, String owner, String endDate) {
         this.active = true;
@@ -42,6 +52,7 @@ public class Lot {
         this.currentPrice = currentPrice;
         this.redemptionPrice = redemptionPrice;
         this.owner = owner;
+        this.currentOwner = owner;
         this.startDate = LocalDateTime.now();
 
         endDate = endDate.replace('T', ' ');
