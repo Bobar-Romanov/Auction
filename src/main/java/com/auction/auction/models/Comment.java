@@ -16,7 +16,9 @@ public class Comment {
     private String comment, username;
 
     public Comment(Long lotId, String comment, String username ) {
-
+            this.lotId = lotId;
+            this.comment = comment;
+            this.username = username;
     }
 
     public Comment() {

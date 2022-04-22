@@ -50,7 +50,7 @@ public class RegController {
         if (!userService.saveUser(user)){
             return "registration";
         }
-        return "redirect:/auction";
+        return "sendEm";
     }
 
     @GetMapping("/activate/{code}")

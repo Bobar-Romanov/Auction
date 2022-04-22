@@ -1,11 +1,14 @@
 package com.auction.auction.controllers;
 
+import com.auction.auction.models.Comment;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
+import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
 import com.auction.auction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,8 @@ public class MainController {
 
     @Autowired
     private LotRepo lotRepo;
+    @Autowired
+    private CommentRepo commentRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -72,7 +77,27 @@ public class MainController {
         ArrayList<Lot> res = new ArrayList<>();
         blog.ifPresent(res::add);
         model.addAttribute("lot", res);
+
+        ArrayList<Comment> comms = commentRepo.findByLotId(id);
+        model.addAttribute("comments", comms);
+
         return "currentLot";
     }
 
+    @PostMapping("/auction/home/{id}/comm")
+    public String addcomm(@AuthenticationPrincipal User user,
+                          @PathVariable(value = "id") long id,
+                          @RequestParam String comment,
+                          Model model){
+
+        System.out.println(id);
+        System.out.println(comment);
+        System.out.println(user.getUsername());
+        System.out.println("sooooqa");
+
+        Comment comment1 = new Comment(id,comment,user.getUsername());
+        commentRepo.save(comment1);
+
+        return "redirect:/auction/home/{id}";
+    }
 }

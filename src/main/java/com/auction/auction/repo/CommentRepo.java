@@ -4,6 +4,8 @@ package com.auction.auction.repo;
 import com.auction.auction.models.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentRepo extends JpaRepository<Comment, Long> {
+import java.util.ArrayList;
 
+public interface CommentRepo extends JpaRepository<Comment, Long> {
+        ArrayList<Comment> findByLotId(long id);
 }
