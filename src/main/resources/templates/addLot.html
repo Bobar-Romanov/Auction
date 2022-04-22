@@ -7,5 +7,20 @@
 </head>
     <body>
         <div th:insert = "topMenu.html::menu" ></div>
+        <form action="/auction/home/add" method="post" enctype="multipart/form-data">
+            <label>Название: </label>
+            <input type = 'text' name="name">
+            <label>Описание: </label>
+            <textarea name="description"></textarea>
+            <label>фото: </label>
+            <input type = "file" name="mainImg">
+            <label>Стартовая цена</label>
+            <input type="text" name="startPrice">
+            <label>Выкупная цена</label>
+            <input type="text" name="redemptionPrice">
+            <label>Дата окончания аукциона</label>
+            <input type="datetime-local" name="endDate">
+            <button type="submit">READY!</button>
+            </form>
     </body>
 </html>

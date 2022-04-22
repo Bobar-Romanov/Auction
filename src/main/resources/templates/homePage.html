@@ -8,11 +8,15 @@
     <body>
     <div th:insert = "topMenu.html::menu" ></div>
     <div>
-        <pre>
-            fdad
-            dafadf
-            1000 - 7
-        </pre>
+        <div th:each="lot : ${lots} ">
+            <p th:text="${lot.getName()}" ></p>
+            <div>
+                <img th:src="'/img/' + ${lot.getMainImg()}" width="400">
+            </div>
+            <p th:text="${lot.getCurrentPrice()}" ></p>
+            <a th:href="'/auction/home/'+${lot.getId()}" >Подробнее</a>
+            <hr>
+        </div>
     </div>
     </body>
 </html>

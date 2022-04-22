@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 public class Lot {
@@ -22,10 +23,19 @@ public class Lot {
     private int currentPrice, redemptionPrice;
 
     private String owner;
+    private String mainImg;
+
+    public String getMainImg() {
+        return mainImg;
+    }
+
+    public void setMainImg(String mainImg) {
+        this.mainImg = mainImg;
+    }
 
     private LocalDateTime startDate, endDate;
 
-    public Lot(String name, String description, int currentPrice, int redemptionPrice, String owner, LocalDateTime endDate) {
+    public Lot(String name, String description, int currentPrice, int redemptionPrice, String owner, String endDate) {
         this.active = true;
         this.name = name;
         this.description = description;
@@ -33,8 +43,12 @@ public class Lot {
         this.redemptionPrice = redemptionPrice;
         this.owner = owner;
         this.startDate = LocalDateTime.now();
-        this.endDate = endDate;
 
+        endDate = endDate.replace('T', ' ');
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.getDefault());
+        LocalDateTime parsedDate = LocalDateTime.parse(endDate, formatter);
+
+        this.endDate = parsedDate;
     }
 
     public Lot() {

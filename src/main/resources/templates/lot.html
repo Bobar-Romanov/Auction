@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Make your bets</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/topMenu.css}" rel="stylesheet" />
+</head>
+<body>
+        <div th:insert = "topMenu.html::menu" ></div>
+        <div>
+            <div th:each="lot : ${lot} ">
+                <p th:text="${lot.getName}" ></p>
+                <p th:text="${lot.getDescription()}" ></p>
+                <div>
+                    <img th:src="'/img/' + ${lot.getMainImg()}" width="400">
+                </div>
+                <p th:text="${lot.getOwner()}" ></p>
+                <p th:text="${lot.getCurrentPrice()}" ></p>
+                <p th:text="${lot.getRedemptionPrice()}" ></p>
+                <p th:text="${lot.getStartDateString()}" ></p>
+                <p th:text="${lot.getEndDateString()}" ></p>
+            </div>
+        </div>
+</body>
+</html>
