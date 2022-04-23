@@ -1,25 +1,35 @@
+.menu{
+    margin-top: -10px;
+}
+
 .menu > ul {
     list-style: none; /*убираем маркеры списка*/
     margin: 0; /*убираем отступы*/
     padding-left: 0; /*убираем отступы*/
-    background:#FF4444; /*добавляем фон всему меню (заменив этот параметр, вы поменяете цвет всего меню)*/
+    background:black; /*добавляем фон всему меню (заменив этот параметр, вы поменяете цвет всего меню)*/
     height: 50px; /*задаем высоту*/
 }
+
+.menu > ul > li > pre{
+    line-height:25px;
+    color: white;
+}
+
 .menu > ul > li > a{
     text-decoration: none; /*убираем подчеркивание текста ссылок*/
-    background:#FF4444; /*добавляем фон к пункту меню (заменив этот параметр, вы поменяете цвет всех пунктов меню)*/
-    color:#fff; /*меняем цвет ссылок*/
+    background:black; /*добавляем фон к пункту меню (заменив этот параметр, вы поменяете цвет всех пунктов меню)*/
     padding:0px 15px; /*добавляем отступ*/
-    font-family: arial; /*меняем шрифт*/
+    font-family: "Lucida Bright"; /*меняем шрифт*/
+    color: white;
     line-height:50px; /*ровняем меню по вертикали*/
     display: block;
-    border-right: 1px solid #F36262; /*добавляем бордюр справа*/
+    border-right: 1px solid black; /*добавляем бордюр справа*/
     -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
     -o-transition: all 0.3s 0.01s ease;
     -webkit-transition: all 0.3s 0.01s ease;
 }
 .menu > ul > li > a:hover {
-    background:#D43737;/*добавляем эффект при наведении*/
+    background:black;/*добавляем эффект при наведении*/
 }
 .left  {
     float:left; /*Размещаем список горизонтально для реализации меню*/
@@ -27,8 +37,14 @@
 .right {
     float:right; /*Размещаем список горизонтально для реализации меню*/
 }
+
+
+
 .search{
     line-height:50px; /*ровняем меню по вертикали*/
     display: block;
-    border-right: 1px solid #F36262;
+}
+
+.searchBut{
+    margin-left: -5px;
 }
