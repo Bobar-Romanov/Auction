@@ -40,27 +40,33 @@
                   <img class="u-expanded-width u-image u-image-default u-image-1"
                        th:src="'/img/' + ${lot.getMainImg()}"
                        alt=":(" data-image-width="1280" data-image-height="720">
-                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2">Продавец:</p>
-                  <p class="u-text u-text-3" th:text="${lot.getOwner()}" ></p>
+                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2" th:text="|продавец: |"></p>
                   <p class="u-text u-text-4" th:text="${lot.getDescription()}" ></p>
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-palette-1-light-3 u-size-30 u-layout-cell-2">
                 <div class="u-container-layout u-container-layout-2">
 
-                  <span class="u-hover-feature u-icon u-text-palette-1-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 51.997 51.997" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-532c"></use></svg><svg class="u-svg-content" viewBox="0 0 51.997 51.997" x="0px" y="0px" id="svg-532c" style="enable-background:new 0 0 51.997 51.997;"><path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+                  <div th:if = "${subscribe}">
+                  <span class="u-hover-feature u-icon u-text-palette-1-base u-icon-1">
+                    <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 51.997 51.997" style="">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-532c">
+                      </use>
+                    </svg>
+                    <svg class="u-svg-content" viewBox="0 0 51.997 51.997" x="0px" y="0px" id="svg-532c" style="enable-background:new 0 0 51.997 51.997;">
+                      <path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
 	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
 	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
-	C52.216,18.553,51.97,16.611,51.911,16.242z"></path></svg></span>
-                  <p class="u-text u-text-5" th:text="${lot.getCurrentOwner()}" ></p>
-                  <p class="u-text u-text-default u-text-6">Последняя ставка:</p>
-                  <p class="u-custom-font u-font-merriweather u-text u-text-default u-text-7" th:text="${lot.getCurrentPrice()}"> <span style="font-weight: 700;">
-                      <span style="font-weight: 400;"></span>
-                    </span>
-                  </p>
-                  <p class="u-text u-text-default u-text-8">Текущая стоимость:&nbsp;</p>
-                  <p class="u-text u-text-default u-text-9">гривень.</p>
-                  <p class="u-text u-text-10">Сделайте ставку</p>
+	C52.216,18.553,51.97,16.611,51.911,16.242z"></path>
+                    </svg>
+                  </span>
+                  </div>
+                  <div th:if = "${subscribe} == false">
+
+                  </div>
+                  <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка: |"></p>
+                  <p class="u-text u-text-default u-text-8" th:text="|Текущая стоимость: ${lot.getCurrentPrice()} крон|"></p>
+                  <p class="u-text u-text-10">Сделайте ставку!</p>
                   <div class="u-form u-form-1">
                     <form action="" method="POST" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;" >
                       <div class="u-form-group u-label-none">
@@ -76,16 +82,12 @@
                       <input type="hidden" value="" name="recaptchaResponse">
                     </form>
                   </div>
-                  <p class="u-custom-font u-font-merriweather u-text u-text-default u-text-11" th:text="${lot.getRedemptionPrice()}"> <span style="font-weight: 700;">
-                      <span style="font-weight: 400;"></span>
-                    </span>
-                  </p>
-                  <p class="u-text u-text-default u-text-12">гривень</p>
-                  <p class="u-text u-text-default u-text-13">Выкупная стоимость:&nbsp;</p>
+                  <br>
+                  <p class="u-text u-text-default u-text-13"th:text="|Выкупная стоимость: ${lot.getRedemptionPrice()} крон|"></p>
                   <p class="u-text u-text-default u-text-14" th:text="${lot.getStartDateString()}" ></p>
-                  <p class="u-text u-text-default u-text-15">Дата начала</p>
+                  <p class="u-text u-text-default u-text-15">Дата начала:</p>
                   <p class="u-text u-text-default u-text-16" th:text="${lot.getEndDateString()}" ></p>
-                  <p class="u-text u-text-default u-text-17">Дата окончания</p>
+                  <p class="u-text u-text-default u-text-17">Дата окончания:</p>
                 </div>
               </div>
             </div>

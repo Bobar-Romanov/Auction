@@ -22,18 +22,10 @@ public class Lot {
 
     private int currentPrice, redemptionPrice;
 
-    private String owner, currentOwner;
+    private Long ownerId;
     private String mainImg;
 
     private LocalDateTime startDate, endDate;
-
-    public String getCurrentOwner() {
-        return currentOwner;
-    }
-
-    public void setCurrentOwner(String currentOwner) {
-        this.currentOwner = currentOwner;
-    }
 
     public String getMainImg() {
         return mainImg;
@@ -44,15 +36,14 @@ public class Lot {
     }
 
 
-
-    public Lot(String name, String description, int currentPrice, int redemptionPrice, String owner, String endDate) {
+    public Lot(String name, String description, int currentPrice, int redemptionPrice, Long ownerId, String endDate) {
         this.active = true;
         this.name = name;
         this.description = description;
+        this.ownerId = ownerId;
         this.currentPrice = currentPrice;
         this.redemptionPrice = redemptionPrice;
-        this.owner = owner;
-        this.currentOwner = owner;
+
         this.startDate = LocalDateTime.now();
 
         endDate = endDate.replace('T', ' ');
@@ -124,12 +115,12 @@ public class Lot {
         this.redemptionPrice = redemptionPrice;
     }
 
-    public String getOwner() {
-        return owner;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public LocalDateTime getStartDate() {

@@ -5,6 +5,7 @@ import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
 import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
+import com.auction.auction.repo.SubscribeRepo;
 import com.auction.auction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,8 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SubscribeRepo subscribeRepo;
 
     @Autowired
     private LotRepo lotRepo;
@@ -58,7 +61,7 @@ public class MainController {
                              @RequestParam("mainImg") MultipartFile mainImg,
                              Model model) throws IOException {
         User curUser = userService.getCurrentUser();
-        Lot lot = new Lot(name, description, startPrice, redemptionPrice, curUser.getUsername(),endDate);
+        Lot lot = new Lot(name, description, startPrice, redemptionPrice, curUser.getId(),endDate);
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()){
             uploadDir.mkdir();
@@ -72,12 +75,15 @@ public class MainController {
     }
 
     @GetMapping("/auction/home/{id}")
-    public String lotById(@PathVariable(value = "id") long id, Model model) {
-        Optional<Lot> blog = lotRepo.findById(id);
+    public String lotById(@AuthenticationPrincipal User user,@PathVariable(value = "id") long id, Model model) {
+        Optional<Lot> lot = lotRepo.findById(id);
         ArrayList<Lot> res = new ArrayList<>();
-        blog.ifPresent(res::add);
+        lot.ifPresent(res::add);
         model.addAttribute("lot", res);
 
+        boolean isSubcribe = subscribeRepo.existsByLotIdAndUserId(id, user.getId());
+        System.out.println(isSubcribe);
+        model.addAttribute("subscribe", isSubcribe);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);
         model.addAttribute("comments", comms);
 
