@@ -1,18 +1,24 @@
 <div th:fragment = "menu">
-    <div class="menu">
-        <ul >
-            <li class="left" ><a href="/auction/home">Главная</a></li>
-            <li class="left" ><a href="/auction/home/add">Добавить лот</a></li>
-            <li class="left" ><a href="#">Избранное</a></li>
-            <li class="left" >
-                <form action="/auction/home" method="post" class="search">
-                    <input name="s" placeholder="Искать здесь..." type="search">
-                    <button type="submit" >Поиск</button>
-                </form>
-            </li>
-            <li class="right" ><a href="#">Профиль</a></li>
-            <li class="right" ><pre th:text = "${#httpServletRequest.remoteUser}"></pre></li>
-            <li class="right" ><a href="/logout"> ЛИВАЮ НАХУЙ </a></li>
-        </ul>
-    </div>
+    <header class="u-clearfix u-header u-header" id="sec-24fe"><div class="u-container-style u-expanded-width u-grey-75 u-group u-group-1">
+        <div class="u-container-layout u-container-layout-1">
+            <a href="/auction/home" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-1">Профиль</a>
+            <a href="/logout" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-2">Выход</a>
+            <h4 class="u-custom-font u-font-roboto u-text u-text-1" th:text = "${#httpServletRequest.remoteUser}"></h4>
+            <a href="/auction/home/add" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-3">Добавить лот</a>
+            <a href="" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-4">Избранное&nbsp;<span class="u-icon"><svg class="u-svg-content" viewBox="0 0 51.997 51.997" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
+	c-2.517-4.307-6.846-6.906-11.697-6.906c-7.399,0-13.313,6.061-14.071,14.415c-0.06,0.369-0.306,2.311,0.442,5.478
+	c1.078,4.568,3.568,8.723,7.199,12.013l18.115,16.439l18.426-16.438c3.631-3.291,6.121-7.445,7.199-12.014
+	C52.216,18.553,51.97,16.611,51.911,16.242z"></path></svg><img></span>
+            </a>
+            <a href="/auction/home" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-5">Главная</a>
+        </div>
+    </div><form action="/auction/home" method="post" class="u-border-1 u-border-grey-30 u-radius-5 u-search u-search-right u-white u-search-1">
+        <button class="u-search-button" type="submit">
+          <span class="u-search-icon u-spacing-10 u-search-icon-1">
+            <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 56.966 56.966"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-d0c8"></use></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg-d0c8" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" class="u-svg-content"><path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"></path></svg>
+          </span>
+        </button>
+        <input class="u-search-input" type="search" name="search" value="" placeholder="Search">
+    </form></header>
 </div>
