@@ -9,6 +9,7 @@ import com.auction.auction.repo.SubscribeRepo;
 import com.auction.auction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.Banner;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -96,14 +97,16 @@ public class MainController {
                           @RequestParam String comment,
                           Model model){
 
-        System.out.println(id);
-        System.out.println(comment);
-        System.out.println(user.getUsername());
-        System.out.println("sooooqa");
-
         Comment comment1 = new Comment(id,comment,user.getUsername());
         commentRepo.save(comment1);
 
         return "redirect:/auction/home/{id}";
+    }
+    @GetMapping("/auction/home/profile")
+    public String profile(@AuthenticationPrincipal User user, Model model) {
+        ArrayList<Lot> lots = lotRepo.findByActiveFalseAndOwnerId(user.getId());
+        model.addAttribute("lots", lots );
+        model.addAttribute("user", user );
+        return "profile";
     }
 }
