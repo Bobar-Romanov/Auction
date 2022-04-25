@@ -1,11 +1,15 @@
 package com.auction.auction.controllers;
 
+import com.auction.auction.models.Comment;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
+import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
+import com.auction.auction.repo.SubscribeRepo;
 import com.auction.auction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +30,13 @@ public class MainController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SubscribeRepo subscribeRepo;
 
     @Autowired
     private LotRepo lotRepo;
+    @Autowired
+    private CommentRepo commentRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -53,7 +61,7 @@ public class MainController {
                              @RequestParam("mainImg") MultipartFile mainImg,
                              Model model) throws IOException {
         User curUser = userService.getCurrentUser();
-        Lot lot = new Lot(name, description, startPrice, redemptionPrice, curUser.getUsername(),endDate);
+        Lot lot = new Lot(name, description, startPrice, redemptionPrice, curUser.getId(),endDate);
         File uploadDir = new File(uploadPath);
         if(!uploadDir.exists()){
             uploadDir.mkdir();
@@ -67,12 +75,35 @@ public class MainController {
     }
 
     @GetMapping("/auction/home/{id}")
-    public String lotById(@PathVariable(value = "id") long id, Model model) {
-        Optional<Lot> blog = lotRepo.findById(id);
+    public String lotById(@AuthenticationPrincipal User user,@PathVariable(value = "id") long id, Model model) {
+        Optional<Lot> lot = lotRepo.findById(id);
         ArrayList<Lot> res = new ArrayList<>();
-        blog.ifPresent(res::add);
+        lot.ifPresent(res::add);
         model.addAttribute("lot", res);
-        return "lot";
+
+        boolean isSubcribe = subscribeRepo.existsByLotIdAndUserId(id, user.getId());
+        System.out.println(isSubcribe);
+        model.addAttribute("subscribe", isSubcribe);
+        ArrayList<Comment> comms = commentRepo.findByLotId(id);
+        model.addAttribute("comments", comms);
+
+        return "currentLot";
     }
 
+    @PostMapping("/auction/home/{id}/comm")
+    public String addcomm(@AuthenticationPrincipal User user,
+                          @PathVariable(value = "id") long id,
+                          @RequestParam String comment,
+                          Model model){
+
+        System.out.println(id);
+        System.out.println(comment);
+        System.out.println(user.getUsername());
+        System.out.println("sooooqa");
+
+        Comment comment1 = new Comment(id,comment,user.getUsername());
+        commentRepo.save(comment1);
+
+        return "redirect:/auction/home/{id}";
+    }
 }

@@ -4,52 +4,23 @@
     <title>Add new Lot</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:href="@{/css/topMenu.css}" rel="stylesheet" />
-    <link th:href="@{/css/stylesaddLot.css}" rel="stylesheet" />
 </head>
     <body>
-
-
-
         <div th:insert = "topMenu.html::menu" ></div>
         <form action="/auction/home/add" method="post" enctype="multipart/form-data">
-            <div class="banner"></div>
-            <div class="add">
-
-                <div class="group2">
-                    <label>Название: </label>
-                    <input type = 'text' name="name">
-                </div>
-
-                <div class="group2">
-                    <label>Стартовая цена:</label>
-                    <input type="text" name="startPrice">
-                </div>
-
-                <div class="group2">
-                    <label>Выкупная цена:</label>
-                    <input type="text" name="redemptionPrice">
-                </div>
-
-                <div class="group2">
-                    <label>Фото: </label>
-                    <input type = "file" name="mainImg">
-                </div>
-
-
-                <div class="group2">
-                    <label>Описание: </label>
-                    <textarea name="description"></textarea>
-                </div>
-
-                <div class="group2">
-                    <label>Дата окончания аукциона:</label>
-                    <input type="datetime-local" name="endDate">
-                </div>
-
-            </div>
-            <div class="but">
-                <center><button type="submit" class="enterbtn">READY!</button></center>
-            </div>
+            <label>Название: </label>
+            <input type = 'text' name="name">
+            <label>Описание: </label>
+            <textarea name="description"></textarea>
+            <label>фото: </label>
+            <input type = "file" name="mainImg">
+            <label>Стартовая цена</label>
+            <input type="text" name="startPrice">
+            <label>Выкупная цена</label>
+            <input type="text" name="redemptionPrice">
+            <label>Дата окончания аукциона</label>
+            <input type="datetime-local" name="endDate">
+            <button type="submit">READY!</button>
             </form>
     </body>
 </html>

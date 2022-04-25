@@ -3,8 +3,33 @@
 <head>
     <title>Welcome to Auction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/css/topMenu.css}" rel="stylesheet" />
-</head>
+
+    <link th:href="@{/css/forTopMenu.css}" rel="stylesheet" />
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="home.js" defer=""></script>
+    <meta name="generator" content="Nicepage 4.9.5, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+    <link rel="stylesheet" th:href="@{/css/homePage.css}" media="screen">
+
+<body class="u-body u-xl-mode">
+<div th:insert = "topMenu.html::menu" ></div>
+<section class="u-clearfix u-palette-3-light-3 u-section-1" id="sec-dadc">
+    <div class="u-clearfix u-sheet u-sheet-1" th:each="lot : ${lots}" >
+        <div class="u-container-style u-group u-palette-1-light-3 u-group-1">
+            <div class="u-container-layout u-container-layout-1">
+                <h3 class="u-custom-font u-font-roboto u-text u-text-default u-text-1" th:text="${lot.getName()}"></h3>
+                <img class="u-image u-image-default u-image-1" th:src="'/img/' + ${lot.getMainImg()}" alt="" data-image-width="480" data-image-height="720">
+                <a th:href="'/auction/home/'+${lot.getId()}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-3-light-3 u-radius-6 u-btn-1">Хочу купить</a>
+                <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон| "></h5>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+<!-- </head>
     <body>
     <div th:insert = "topMenu.html::menu" ></div>
     <div>
@@ -19,4 +44,4 @@
         </div>
     </div>
     </body>
-</html>
+</html> -->

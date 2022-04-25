@@ -7,21 +7,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Comment {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Long lotId;
-    private String comment, username;
+    private String imgName;
 
-    public Comment(Long lotId, String comment, String username ) {
-            this.lotId = lotId;
-            this.comment = comment;
-            this.username = username;
+
+    public Image(Long lotId, String imgName) {
+        this.lotId = lotId;
+        this.imgName = imgName;
     }
 
-    public Comment() {
+    public Image() {
     }
 
     public Long getId() {
@@ -40,19 +40,11 @@ public class Comment {
         this.lotId = lotId;
     }
 
-    public String getComment() {
-        return comment;
+    public String getImgName() {
+        return imgName;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
     }
 }
