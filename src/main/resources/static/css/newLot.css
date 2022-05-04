@@ -27,17 +27,52 @@
 }
 .u-section-1 .u-icon-1 {
   width: 45px;
-
   margin: 0 30px 0 auto;
 
 }
-.u-icon-1 > img{
+.plusIco > img{
   width: 45px;
   height: 45px;
-
   margin: -10px 30px 0 auto;
 
 }
+.heartIco > img{
+  width: 45px;
+  height: 45px;
+  margin: -10px 30px 0 auto;
+
+}
+
+.heartIco:hover::after {
+  content: attr(data-title); /* Выводим текст */
+  position: relative; /* Абсолютное позиционирование */
+  left: 100%;
+   /* Положение подсказки */
+  z-index: 1; /* Отображаем подсказку поверх других элементов */
+  background: rgb(255, 219, 0); /* Полупрозрачный цвет фона */
+  color: #000000; /* Цвет текста */
+  text-align: center; /* Выравнивание текста по центру */
+  font-family: Arial, sans-serif; /* Гарнитура шрифта */
+  font-size: 14px; /* Размер текста подсказки */
+  padding: 5px 10px; /* Поля */
+  border: 1px solid #333; /* Параметры рамки */
+}
+.plusIco:hover::after {
+  content: attr(data-title); /* Выводим текст */
+  position: relative;  /* Абсолютное позиционирование */
+  left: 100%;
+  top: 50px; /* Положение подсказки */
+  z-index: 1; /* Отображаем подсказку поверх других элементов */
+  background: rgb(255, 219, 0); /* Полупрозрачный цвет фона */
+  color: #000000; /* Цвет текста */
+  text-align: center; /* Выравнивание текста по центру */
+  font-family: Arial, sans-serif; /* Гарнитура шрифта */
+  font-size: 14px; /* Размер текста подсказки */
+  padding: 5px 10px; /* Поля */
+  border: 1px solid #333; /* Параметры рамки */
+}
+
+
 
 .u-section-1 .u-text-2 {
   font-size: 0.875rem;

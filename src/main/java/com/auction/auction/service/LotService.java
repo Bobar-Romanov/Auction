@@ -21,4 +21,7 @@ public class LotService  {
     public ArrayList<Lot> getFavoriteLots(Long userId){
         return lotRepo.favoriteLots(userId);
     }
+    public String getSeller(Long lotId){
+        return lotRepo.seller(lotId);
+    }
 }

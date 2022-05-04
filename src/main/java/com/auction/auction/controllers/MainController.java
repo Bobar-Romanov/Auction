@@ -80,10 +80,15 @@ public class MainController {
 
     @GetMapping("/auction/home/{id}")
     public String lotById(@AuthenticationPrincipal User user,@PathVariable(value = "id") long id, Model model) {
+
         Optional<Lot> lot = lotRepo.findById(id);
         ArrayList<Lot> res = new ArrayList<>();
         lot.ifPresent(res::add);
         model.addAttribute("lot", res);
+
+
+        String seller = lotService.getSeller(id);
+        model.addAttribute("seller", seller);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);
         model.addAttribute("comments", comms);
 

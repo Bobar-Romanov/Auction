@@ -32,7 +32,7 @@
                   <img class="u-expanded-width u-image u-image-default u-image-1"
                        th:src="'/img/' + ${lot.getMainImg()}"
                        alt=":(" data-image-width="1280" data-image-height="720">
-                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2" th:text="|продавец: |"></p>
+                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2" th:text="|продавец: ${seller} |"></p>
                   <p class="u-text u-text-4" th:text="${lot.getDescription()}" ></p>
                 </div>
               </div>
@@ -40,8 +40,8 @@
                 <div class="u-container-layout u-container-layout-2">
 
                     <div class="u-icon-1" >
-                      <img src="/ico/like.png" id="heartIco" hidden onclick="unSub()">
-                      <img src="/ico/plus.png" id="plusIco" hidden onclick="sub()">
+                     <div class="heartIco" data-title="отписаться?"><img src="/ico/like.png" id="heartIco" hidden onclick="unSub()" ></div>
+                      <div class="plusIco" data-title="подписаться?"><img src="/ico/plus.png" id="plusIco" hidden onclick="sub()" ></div>
                     </div>
 
                   <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка: |"></p>
