@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SubscribeRepo extends JpaRepository<Subscribe, Long> {
 
     boolean existsByLotIdAndUserId(Long lotId, Long userId);
+    Subscribe getByLotIdAndUserId(Long lotId, Long userId);
 }

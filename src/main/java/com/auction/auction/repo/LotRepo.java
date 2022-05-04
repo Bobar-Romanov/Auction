@@ -11,4 +11,12 @@ import java.util.ArrayList;
 
 public interface LotRepo extends JpaRepository<Lot, Long> {
       ArrayList<Lot> findByActiveFalseAndOwnerId(Long id);
+
+      @Query(value = "SELECT l FROM Lot l WHERE l.active = TRUE ORDER BY l.startDate desc")
+      ArrayList<Lot> activeLots();
+
+      @Query(value = "SELECT l FROM Lot l LEFT JOIN Subscribe s ON s.lotId = l.id WHERE s.userId = ?1")
+      ArrayList<Lot> favoriteLots(Long userId);
+
+
    }

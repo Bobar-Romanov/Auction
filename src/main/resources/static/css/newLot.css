@@ -27,9 +27,16 @@
 }
 .u-section-1 .u-icon-1 {
   width: 45px;
-  height: 45px;
-  transition-duration: 0.5s;
+
   margin: 0 30px 0 auto;
+
+}
+.u-icon-1 > img{
+  width: 45px;
+  height: 45px;
+
+  margin: -10px 30px 0 auto;
+
 }
 
 .u-section-1 .u-text-2 {

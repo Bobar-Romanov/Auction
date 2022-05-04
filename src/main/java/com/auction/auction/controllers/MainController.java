@@ -6,6 +6,8 @@ import com.auction.auction.models.User;
 import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
 import com.auction.auction.repo.SubscribeRepo;
+import com.auction.auction.service.LotService;
+import com.auction.auction.service.SubscribeService;
 import com.auction.auction.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,10 +15,7 @@ import org.springframework.boot.Banner;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -32,10 +31,11 @@ public class MainController {
     @Autowired
     private UserService userService;
     @Autowired
-    private SubscribeRepo subscribeRepo;
-
+    private SubscribeService subscribeService;
     @Autowired
     private LotRepo lotRepo;
+    @Autowired
+    private LotService lotService;
     @Autowired
     private CommentRepo commentRepo;
 
@@ -44,15 +44,18 @@ public class MainController {
 
     @GetMapping("/auction/home")
     public String HomePage(Model model) {
-        Iterable<Lot> lots = lotRepo.findAll();
+        Iterable<Lot> lots = lotService.getActiveLots();
         model.addAttribute("lots", lots);
         return "homePage";
     }
+
+
+
     @GetMapping("/auction/home/add")
     public String addLot() {
-        User curUser = userService.getCurrentUser();
         return "addLot";
     }
+
     @PostMapping ("/auction/home/add")
     public String addLotPost(@RequestParam String name,
                              @RequestParam String description,
@@ -81,10 +84,6 @@ public class MainController {
         ArrayList<Lot> res = new ArrayList<>();
         lot.ifPresent(res::add);
         model.addAttribute("lot", res);
-
-        boolean isSubcribe = subscribeRepo.existsByLotIdAndUserId(id, user.getId());
-        System.out.println(isSubcribe);
-        model.addAttribute("subscribe", isSubcribe);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);
         model.addAttribute("comments", comms);
 
@@ -109,4 +108,12 @@ public class MainController {
         model.addAttribute("user", user );
         return "profile";
     }
+
+    @GetMapping("/auction/home/favorite")
+    public String favoriteLots(@AuthenticationPrincipal User user, Model model) {
+        ArrayList<Lot> lots = lotService.getFavoriteLots(user.getId());
+        model.addAttribute("lots", lots);
+        return "favorite";
+    }
+
 }
