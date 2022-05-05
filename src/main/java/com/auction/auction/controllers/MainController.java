@@ -1,11 +1,13 @@
 package com.auction.auction.controllers;
 
 import com.auction.auction.models.Comment;
+import com.auction.auction.models.Image;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
 import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
 import com.auction.auction.repo.SubscribeRepo;
+import com.auction.auction.service.ImgService;
 import com.auction.auction.service.LotService;
 import com.auction.auction.service.SubscribeService;
 import com.auction.auction.service.UserService;
@@ -38,6 +40,8 @@ public class MainController {
     private LotService lotService;
     @Autowired
     private CommentRepo commentRepo;
+    @Autowired
+    private ImgService imgService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -87,6 +91,8 @@ public class MainController {
         model.addAttribute("lot", res);
 
 
+        ArrayList<Image> images = imgService.getImagesLotId(id);
+        model.addAttribute("images", images);
         String seller = lotService.getSeller(id);
         model.addAttribute("seller", seller);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);

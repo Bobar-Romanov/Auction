@@ -5,7 +5,6 @@ function check(){
    $.ajax({
       url: window.location + "/checkSub",
       success: function (data){
-         console.log(data);
           if(data == 'true'){
              document.getElementById("heartIco").hidden = false;
           }else{

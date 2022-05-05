@@ -17,31 +17,16 @@
 <div th:insert = "topMenu.html::menu" ></div>
 <section class="u-clearfix u-palette-3-light-3 u-section-1" id="sec-dadc">
     <div class="u-clearfix u-sheet u-sheet-1"  >
-        <div class="u-container-style u-group u-palette-1-light-3 u-group-1" th:each="lot : ${lots}">
+        <div class="u-container-style u-group u-palette-1-light-3 u-group-1" th:each="lot,iterStat : ${lots}">
             <div class="u-container-layout u-container-layout-1">
                 <h3 class="u-custom-font u-font-roboto u-text u-text-default u-text-1" th:text="${lot.getName()}"></h3>
                 <img class="u-image u-image-default u-image-1" th:src="'/img/' + ${lot.getMainImg()}" alt="" data-image-width="480" data-image-height="720">
                 <a th:href="'/auction/home/'+${lot.getId()}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-3-light-3 u-radius-6 u-btn-1">Хочу купить</a>
-                <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон| "></h5>
+                <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон (${iterStat.count})| "></h5>
             </div>
         </div>
     </div>
 </section>
+<div th:insert = "topMenu.html::up" ></div>
 </body>
 </html>
-<!-- </head>
-    <body>
-    <div th:insert = "topMenu.html::menu" ></div>
-    <div>
-        <div th:each="lot : ${lots} ">
-            <p th:text="${lot.getName()}" ></p>
-            <div>
-                <img th:src="'/img/' + ${lot.getMainImg()}" width="400">
-            </div>
-            <p th:text="${lot.getCurrentPrice()}" ></p>
-            <a th:href="'/auction/home/'+${lot.getId()}" >Подробнее</a>
-            <hr>
-        </div>
-    </div>
-    </body>
-</html> -->
