@@ -85,6 +85,7 @@ public class MainController {
 
         ArrayList<Image> images = imgService.getImagesLotId(id);
         model.addAttribute("images", images);
+        model.addAttribute("total", images.size() + 1);
         String seller = lotService.getSeller(id);
         model.addAttribute("seller", seller);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);

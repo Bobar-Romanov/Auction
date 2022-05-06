@@ -40,18 +40,22 @@
                           <img class="u-back-image u-expanded" th:src="'/img/' + ${lot.getMainImg()}">
                         </div>
                         <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1">
+                          <p class="u-custom-font u-font-roboto u-gallery-text" style="margin-top: 0px;
+                           background-image: none;" th:text="| 1/${total} |"></p>
                         </div>
                       </div>
 
 
-                      <div class=" u-carousel-item u-effect-fade u-gallery-item u-carousel-item-2" th:each="img : ${images}" >
+                      <div class=" u-carousel-item u-effect-fade u-gallery-item u-carousel-item-2" th:each="img,iterStat : ${images}" >
                         <div class="u-back-slide" data-image-width="1600" data-image-height="832">
                           <img class="u-back-image u-expanded" th:src="'/img/' + ${img.getImgName()}">
                         </div>
                         <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-2">
+                          <p class="u-custom-font u-font-roboto u-gallery-text" style="margin-top: 0px;
+                          background-image: none;" th:text="| ${iterStat.count + 1}/${total} |" ></p>
                         </div>
                       </div>
-                      <<a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-carousel-control-1" href="#carousel-6d56" role="button" data-u-slide="prev">
+                      <a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-grey-70 u-icon-circle u-opacity u-opacity-70 u-spacing-10 u-text-white u-carousel-control-1" href="#carousel-6d56" role="button" data-u-slide="prev">
             <span aria-hidden="true">
               <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
 c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
