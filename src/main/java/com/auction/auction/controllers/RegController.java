@@ -22,7 +22,6 @@ public class RegController {
         return "login";
     }
 
-
     @GetMapping("/auction/registration")
     public String registration()
     {
@@ -31,26 +30,7 @@ public class RegController {
 
     @PostMapping("/auction/registration")
     public String addUser(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
-
-        User user = new User(username, email, password);
-
-        if(userRepo.existsByEmail(email)){
-            model.addAttribute("emailError", "Данный email адрес уже зарегистрирован");
-            model.addAttribute("email", email);
-            model.addAttribute("username", username);
-            return "registration";
-        }
-        if(userRepo.existsByUsername(username)){
-            model.addAttribute("nameError", "Пользователь с таким именем уже существует");
-            model.addAttribute("email", email);
-            model.addAttribute("username", username);
-            return "registration";
-        }
-
-        if (!userService.saveUser(user)){
-            return "registration";
-        }
-        return "sendEm";
+        return userService.addUser(username, email, password, model);
     }
 
     @GetMapping("/activate/{code}")

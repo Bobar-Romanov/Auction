@@ -61,25 +61,17 @@ public class MainController {
     }
 
     @PostMapping ("/auction/home/add")
-    public String addLotPost(@RequestParam String name,
+    public String addLotPost(@AuthenticationPrincipal User user,
+                             @RequestParam String name,
                              @RequestParam String description,
                              @RequestParam int startPrice,
                              @RequestParam int redemptionPrice,
                              @RequestParam String endDate,
                              @RequestParam("mainImg") MultipartFile mainImg,
+                             @RequestParam(value = "images",required = false) MultipartFile[] images,
                              Model model) throws IOException {
-        User curUser = userService.getCurrentUser();
-        Lot lot = new Lot(name, description, startPrice, redemptionPrice, curUser.getId(),endDate);
-        File uploadDir = new File(uploadPath);
-        if(!uploadDir.exists()){
-            uploadDir.mkdir();
-        }
-        String uuidFile = UUID.randomUUID().toString();
-        String res = uuidFile + "." + mainImg.getOriginalFilename();
-        mainImg.transferTo(new File(uploadPath + "/" + res));
-        lot.setMainImg(res);
-        lotRepo.save(lot);
-        return "redirect:/auction/home";
+
+        return lotService.addLot(name, description, startPrice, redemptionPrice, user.getId(),endDate,mainImg,images, model);
     }
 
     @GetMapping("/auction/home/{id}")
