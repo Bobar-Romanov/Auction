@@ -54,6 +54,18 @@ public class MainController {
     }
 
 
+        @PostMapping("/auction/home")
+        public String search (@RequestParam String search, Model model){
+
+            System.out.println(search);
+            ArrayList<Lot> lots = lotService.search(search);
+
+            model.addAttribute("lots", lots);
+
+            return "homePage";
+
+    }
+
 
     @GetMapping("/auction/home/add")
     public String addLot() {
@@ -119,5 +131,7 @@ public class MainController {
         model.addAttribute("lots", lots);
         return "favorite";
     }
+
+
 
 }

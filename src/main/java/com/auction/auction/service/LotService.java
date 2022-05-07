@@ -67,4 +67,14 @@ public class LotService  {
 
         return "redirect:/auction/home";
     }
+
+    public ArrayList<Lot> search(String search) {
+        ArrayList<Lot> byName = lotRepo.findByNameContains(search);
+        ArrayList<Lot> byDesc = lotRepo.findByDescriptionContains(search);
+
+        byDesc.removeAll(byName);
+        byName.addAll(byDesc);
+
+        return byName;
+    }
 }
