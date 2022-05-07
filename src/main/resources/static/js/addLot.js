@@ -29,7 +29,7 @@ function updateSize() {
         let err1 = document.createElement('p');
         err1.textContent = 'So BIG';
         err1.classList.add('error');
-        this.appendChild(err1);
+        this.appendChild(err1); //не работает надо исправить
     }
     if(ext == 'png'  || ext == 'jpg'  || ext == 'gif'  || ext == 'jpeg'  || ext == 'pdf'){
         return;
@@ -37,7 +37,7 @@ function updateSize() {
         let err2 = document.createElement('p');
         err2.textContent = 'Wrong ext';
         err2.classList.add('error');
-        this.appendChild(err2);
+        this.appendChild(err2); //не работает надо исправить
     }
 
 }
