@@ -1,4 +1,5 @@
 let list = document.querySelector('#imgs');
+let subbtn = document.getElementById('sub');
 
 function addImg(){
     let input = document.createElement('input');
@@ -10,41 +11,79 @@ function addImg(){
     icon.setAttribute('src', '/ico/close.png');
     icon.setAttribute('onclick', 'this.parentNode.parentNode.removeChild(this.parentNode);');
     icon.classList.add('delIco');
+    let p = document.createElement('p');
+    p.textContent = '';
+    p.classList.add('error');
     let li = document.createElement('li');
     li.appendChild(input);
     li.appendChild(icon);
+    li.appendChild(p);
     list.appendChild(li);
-    let uploads = document.getElementsByClassName('upload');
-    for (let i = 0; i < uploads.length; i++) {
-        uploads[i].addEventListener('change', updateSize);
-    }
 
 }
-function updateSize() {
-    let file = this.files[0];
+function updateSize(elem) {
+    if (elem == null){
+        return true;
+    }
+    let file = elem.files[0];
+    let parts = file.name.split('.');
+    let ext = parts.pop();
+
+    let parnt = elem.parentElement;
+
+    if(file.size >= 1048576){
+        parnt.lastChild.textContent = "so big";
+        return false;
+    }
+    if(ext == 'png'  || ext == 'jpg'  || ext == 'gif'  || ext == 'jpeg'  || ext == 'pdf'){
+        parnt.lastChild.textContent = "";
+        return true;
+    }else {
+        parnt.lastChild.textContent = "wrong ext";
+        return false;
+    }
+}
+
+
+let mainimg = document.getElementById('mainUpload');
+let err = document.getElementById('error1');
+
+function sizecheck(){
+    let file = mainimg.files[0];
     let parts = file.name.split('.');
     let ext = parts.pop();
 
     if(file.size >= 1048576){
-        let err1 = document.createElement('p');
-        err1.textContent = 'So BIG';
-        err1.classList.add('error');
-        this.appendChild(err1); //не работает надо исправить
+        err.textContent = "so big";
+        return false;
     }
     if(ext == 'png'  || ext == 'jpg'  || ext == 'gif'  || ext == 'jpeg'  || ext == 'pdf'){
-        return;
+        err.lastChild.textContent = "";
+        return true;
     }else {
-        let err2 = document.createElement('p');
-        err2.textContent = 'Wrong ext';
-        err2.classList.add('error');
-        this.appendChild(err2); //не работает надо исправить
+        err.lastChild.textContent = "wrong ext";
+        return false;
     }
-
 }
 
-    let uploads = document.getElementsByClassName('upload');
-    for (let i = 0; i < uploads.length; i++) {
-        uploads[i].addEventListener('change', updateSize);
+mainimg.addEventListener('change', sizecheck);
+
+
+    function  check(){
+        let uploads = document.getElementsByClassName('upload');
+        for (let i = 0; i < uploads.length; i++) {
+            if(updateSize(uploads[i]) == false){
+                subbtn.setAttribute('type', 'button');
+                alert("988");
+                return;
+            }
+        }
+        if(sizecheck() == false){
+            subbtn.setAttribute('type', 'button');
+            return;
+        }
+        subbtn.setAttribute('type', 'submit');
     }
 
+subbtn.addEventListener('click', check);
 

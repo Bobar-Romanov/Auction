@@ -93,22 +93,20 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                       <div class="plusIco" data-title="подписаться?"><img src="/ico/plus.png" id="plusIco" hidden onclick="sub()" ></div>
                     </div>
 
-                  <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка: |"></p>
+                  <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка:|"  ></p>
+                    <p class="u-text u-text-default u-text-7" id="currentBet" ></p>
                   <p class="u-text u-text-default u-text-8" th:text="|Текущая стоимость: ${lot.getCurrentPrice()} крон|"></p>
                   <p class="u-text u-text-10">Сделайте ставку!</p>
                   <div class="u-form u-form-1">
-                    <form action="" method="POST" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;" >
                       <div class="u-form-group u-label-none">
-                        <label for="email-dc28" class="u-form-control-hidden u-label"></label>
-                        <input type="text" id="email-dc28" name="bet" class="u-border-2 u-border-black u-input u-input-rectangle u-white u-input-1" required="required" maxlength="10">
+                        <label for="betInput" class="u-form-control-hidden u-label"></label>
+                        <input type="text" id="betInput" name="bet" class="u-border-2 u-border-black u-input u-input-rectangle u-white u-input-1" required="required" maxlength="10">
                       </div>
                       <div class="u-form-group u-form-submit">
-                        <a href="#" class="u-border-none u-btn u-btn-submit u-button-style u-hover-palette-1-light-2 u-palette-1-base u-btn-1">Повысить</a>
-                        <input type="submit" value="submit" class="u-form-control-hidden">
+                        <button type="submit"  id="submitBet"> повысить </button>
+                          <p th:text="${lot.getId()}" hidden id="lotId"></p>
                       </div>
-
-                      <input type="hidden" value="" name="recaptchaResponse">
-                    </form>
+                    <p class="u-text u-text-default u-text-13" id="msg"></p>
                   </div>
                   <br>
                   <p class="u-text u-text-default u-text-13"th:text="|Выкупная стоимость: ${lot.getRedemptionPrice()} крон|"></p>
@@ -136,9 +134,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                  <div class="u-align-left u-form-group u-form-submit">
                    <button type="submit">Отправить</button>
                  </div>
-                 <div class="u-form-send-message u-form-send-success"> Спасибо! Ваше сообщение отправлено. </div>
-                 <div class="u-form-send-error u-form-send-message"> Отправка не удалась. Пожалуйста, исправьте ошибки и попробуйте еще раз. </div>
-                 <input type="hidden" value="" name="recaptchaResponse">
+
                </form>
              </div>
            </div>
@@ -152,9 +148,11 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
        </div>
 
      </section>
-     <div th:insert = "topMenu.html::up" ></div>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
      <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
      <script src="/js/subscribe.js"></script>
+     <script src="/js/betManage.js"></script>
      <script class="u-script" type="text/javascript" src="/js/jquery.js" defer=""></script>
   </body>
 </html>

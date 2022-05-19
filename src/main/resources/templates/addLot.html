@@ -43,7 +43,8 @@
 
             <div class="group2">
                 <label>фото: </label>
-                <input type = "file" name="mainImg" class="upload" required>
+                <input type = "file" name="mainImg"  id="mainUpload" required>
+                <p class="error" id="error1"></p>
             </div>
 
             <img src="/ico/plus.png" onclick="addImg()" class="delIco">
@@ -65,7 +66,7 @@
             </div>
 
             <div class="but">
-                <button type="submit" class="enterbtn">Выставить</button>
+                <button type="submit" class="enterbtn" id="sub">Выставить</button>
             </div>
         </div>
         </form>
