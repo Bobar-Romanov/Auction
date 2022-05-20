@@ -1,5 +1,6 @@
 package com.auction.auction.controllers;
 
+import com.auction.auction.forms.ResponseBet;
 import com.auction.auction.models.User;
 import com.auction.auction.service.BetService;
 import net.minidev.json.JSONObject;
@@ -9,7 +10,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -20,11 +23,15 @@ public class BetController {
 
     @MessageMapping("/auction/home/{id}/makeBet")
     @SendTo("/topic/bet/{id}")
-    public String addBet(@Payload String jsonString, SimpMessageHeaderAccessor headerAccessor) {
-        System.out.println(betService.idFromJson(jsonString));
-        System.out.println(betService.ValueFromJson(jsonString));
-        System.out.println(headerAccessor.getUser().getName());
-        return betService.ValueFromJson(jsonString);
+    public ResponseBet addBet(@Payload String jsonString, SimpMessageHeaderAccessor headerAccessor) {
+
+        return betService.addNewBet(betService.idFromJson(jsonString),betService.ValueFromJson(jsonString),headerAccessor.getUser().getName());
+    }
+
+    @RequestMapping(value = "auction/home/{id}/checkBet", method = RequestMethod.GET, produces = {"text/html;charset=UTF-8"})
+    public @ResponseBody
+    String checkBet(@PathVariable(value = "id") long id, @AuthenticationPrincipal User user, @RequestParam String curBet) {
+        return betService.checkBet(id, user, curBet);
     }
 
 }

@@ -1,7 +1,8 @@
 'use strict';
 let betInput = document.querySelector('#betInput');
-let bet = document.querySelector('#currentBet');
-let msg = document.querySelector('#msg');
+let curbet = document.querySelector('#currentBet');
+let owner = document.querySelector('#currentBetOwner');
+let curmsg = document.querySelector('#msg');
 let submitBet = document.querySelector('#submitBet');
 let lotId = document.querySelector('#lotId');
 //let messageForm = document.querySelector('#messageForm');
@@ -23,7 +24,22 @@ function onConnected() {
     console.log(stompClient.subscribe("/topic/bet/" + lotId.textContent , onMessageReceived));
    }
 function onError(error) {
-    alert("NO!");
+
+}
+function chek(){
+    $.ajax({
+        url: window.location + "/checkBet",
+        data:({curBet:$("#betInput").val()}),
+        success: function (data){
+            $("#msg").html(data);
+            if(data == "") {
+                sub();
+                newBet();
+            }else{
+
+            }
+        },
+    });
 }
 function newBet(event) {
 
@@ -42,7 +58,12 @@ function newBet(event) {
 }
 function onMessageReceived(payload) {
     let message = JSON.parse(payload.body);
-    bet.textContent = message;
+    console.log(message.bet);
+    if(message.type = true){
+    curbet.textContent = message.bet;
+    owner.textContent = message.username;
+    curmsg.textContent = message.msg;
+    }
 }
 connect();
-submitBet.addEventListener('click', newBet, true);
+submitBet.addEventListener('click', chek, true);

@@ -66,6 +66,16 @@ public class UserService implements UserDetailsService {
         String currentPrincipalName = authentication.getName();
         return userRepository.findByUsername(currentPrincipalName);
     }
+
+    public void balaceManage(Long sellerId, Long newOwnerId, int value){
+            User seller = userRepository.getById(sellerId);
+            User newOwner = userRepository.getById(newOwnerId);
+            seller.incBalance(value);
+            newOwner.decBalance(value);
+            userRepository.save(seller);
+            userRepository.save(newOwner);
+
+    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);

@@ -45,6 +45,10 @@ public class User implements UserDetails {
         this.balance -= value;
     }
 
+    public void incBalance(int value) {
+        this.balance += value;
+    }
+
     public User(String nick, String email, String pass) {
         this.username = nick;
         this.email = email;

@@ -68,7 +68,7 @@ public class MainController {
 
 
     @GetMapping("/auction/home/add")
-    public String addLot() {
+    public String addLot(Model model) {
         return "addLot";
     }
 
@@ -122,7 +122,7 @@ public class MainController {
         ArrayList<Lot> lots = lotRepo.findByActiveFalseAndOwnerId(user.getId());
         model.addAttribute("lots", lots );
         model.addAttribute("user", user );
-        return "profile";
+        return "profile" ;
     }
 
     @GetMapping("/auction/home/favorite")
@@ -130,6 +130,11 @@ public class MainController {
         ArrayList<Lot> lots = lotService.getFavoriteLots(user.getId());
         model.addAttribute("lots", lots);
         return "favorite";
+    }
+
+    @ModelAttribute(name = "user")
+    public User currentUser(@AuthenticationPrincipal User user) {
+        return user;
     }
 
 
