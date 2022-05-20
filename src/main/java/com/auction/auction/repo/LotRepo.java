@@ -31,4 +31,5 @@ public interface LotRepo extends JpaRepository<Lot, Long> {
       @Query(value = "SELECT l FROM Lot l WHERE l.id = ?1")
       Lot lotById(Long id);
 
-   }
+
+}

@@ -94,7 +94,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                     </div>
 
                   <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка:|"  ></p>
-                    <p class="u-text u-text-default u-text-7" id="currentBetOwner" ></p>
+                    <p class="u-text u-text-default u-text-7" id="currentBetOwner" th:text = "${lastBet}" ></p>
                   <p class="u-text u-text-default u-text-8" th:text="|Текущая стоимость:|"></p>
                     <p class="u-text u-text-default u-text-9" id="currentBet" th:text = "${lot.getCurrentPrice()}" ></p>
                     <p class="u-text u-text-default u-text-10" >крон</p>
@@ -156,6 +156,6 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
      <script src="/js/subscribe.js"></script>
      <script src="/js/betManage.js"></script>
      <script class="u-script" type="text/javascript" src="/js/jquery.js" defer=""></script>
-     <script class="u-script" type="text/javascript" src="/js/nicepage.js" defer=""></script>
+
   </body>
 </html>

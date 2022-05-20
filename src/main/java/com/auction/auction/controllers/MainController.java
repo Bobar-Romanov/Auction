@@ -7,10 +7,7 @@ import com.auction.auction.models.User;
 import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
 import com.auction.auction.repo.SubscribeRepo;
-import com.auction.auction.service.ImgService;
-import com.auction.auction.service.LotService;
-import com.auction.auction.service.SubscribeService;
-import com.auction.auction.service.UserService;
+import com.auction.auction.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
@@ -42,6 +39,8 @@ public class MainController {
     private CommentRepo commentRepo;
     @Autowired
     private ImgService imgService;
+    @Autowired
+    private BetService betService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -95,11 +94,14 @@ public class MainController {
         model.addAttribute("lot", res);
 
 
+
         ArrayList<Image> images = imgService.getImagesLotId(id);
         model.addAttribute("images", images);
         model.addAttribute("total", images.size() + 1);
         String seller = lotService.getSeller(id);
         model.addAttribute("seller", seller);
+        String lastBet = betService.lastBet(id);
+        model.addAttribute("lastBet", lastBet);
         ArrayList<Comment> comms = commentRepo.findByLotId(id);
         model.addAttribute("comments", comms);
 
