@@ -19,14 +19,14 @@
 
         <div class="group">
             <label for="nickname"><b>Nickname:</b></label>
-            <input type="text" placeholder="nickname" name="username" id="nickname" th:value="${username}"
+            <input type="text" placeholder="nickname" maxlength="20" minlength="4" name="username" id="nickname" th:value="${username}"
                    onblur="checkLog()" required>
             <pre th:text="${nameError}" class="error" id = "logError"></pre>
         </div>
 
         <div class="group">
             <label for="password"><b>Password:</b></label>
-            <input type="password" placeholder="password" name="password" id="password" onblur="checkPass()" required>
+            <input type="password" maxlength="20" minlength="8" placeholder="password" name="password" id="password" onblur="checkPass()" required>
             <pre  id = "passError" class="error"></pre>
         </div>
 

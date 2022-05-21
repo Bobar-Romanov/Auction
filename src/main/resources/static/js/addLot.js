@@ -54,7 +54,7 @@ function sizecheck(){
     let ext = parts.pop();
 
     if(file.size >= 1048576){
-        err.textContent = "so big";
+        err.textContent = "Файл слишком большой";
         return false;
     }
     if(ext == 'png'  || ext == 'jpg'  || ext == 'gif'  || ext == 'jpeg'  || ext == 'pdf'){
