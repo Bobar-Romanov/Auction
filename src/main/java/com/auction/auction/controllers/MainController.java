@@ -61,7 +61,7 @@ public class MainController {
 
         @PostMapping("/auction/home")
         public String search (@RequestParam String search, Model model,
-                              @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable){
+                              @PageableDefault(sort = {},direction = Sort.Direction.DESC) Pageable pageable){
             Page<Lot> lotsPages = lotService.searchPage(search,pageable);
             model.addAttribute("lots", lotsPages);
             return "homePage";
