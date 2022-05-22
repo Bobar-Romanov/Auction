@@ -44,7 +44,7 @@
 }
 
 .heartIco:hover::after {
-  content: attr(data-title); /* Выводим текст */
+
   position: relative; /* Абсолютное позиционирование */
   left: 100%;
    /* Положение подсказки */
@@ -58,7 +58,7 @@
   border: 1px solid #333; /* Параметры рамки */
 }
 .plusIco:hover::after {
-  content: attr(data-title); /* Выводим текст */
+
   position: relative;  /* Абсолютное позиционирование */
   left: 100%;
   top: 50px; /* Положение подсказки */

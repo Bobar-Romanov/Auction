@@ -36838,10 +36838,13 @@ a.u-link.u-text-hover-grey-90:hover {
   padding: 8px 19px 8px 18px;
 }
 
-.u-header .u-text-1 {
-  margin: -33px 21px 0 60%;
-
+.u-header .u-text-menu {
+   margin: -30px 21px 0 60%;
     width: 400px;
+}
+.u-text-menu{
+    font-size: 20px;
+
 }
 
 .u-header .u-btn-3 {
@@ -36849,7 +36852,7 @@ a.u-link.u-text-hover-grey-90:hover {
   font-size: 0.9375rem;
   font-weight: 500;
   background-image: none;
-  margin: -36px auto 0 334px;
+  margin: -33px auto 0 334px;
   padding: 8px 19px 8px 18px;
 }
 
@@ -36905,6 +36908,7 @@ a.u-link.u-text-hover-grey-90:hover {
     margin-top: -35px;
     margin-right: 0;
     margin-left: 833px;
+      font-size: 16px;
   }
 
   .u-header .u-btn-3 {
