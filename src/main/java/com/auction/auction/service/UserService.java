@@ -48,13 +48,18 @@ public class UserService implements UserDetailsService {
         return "sendEm";
     }
 
-    public void balaceManage(Long sellerId, Long newOwnerId, int value){
+    public boolean balaceManage(Long sellerId, Long newOwnerId, int value){
             User seller = userRepository.getById(sellerId);
             User newOwner = userRepository.getById(newOwnerId);
+
+            if(newOwner.getBalance() < value){
+                return false;
+            }
             seller.incBalance(value);
             newOwner.decBalance(value);
             userRepository.save(seller);
             userRepository.save(newOwner);
+            return true;
 
     }
     @Override

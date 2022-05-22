@@ -14,7 +14,7 @@ public interface BetRepo extends JpaRepository<Bet, Long> {
     ArrayList<String> lastBet(Long lotId);
 
 
-    ArrayList<Bet> getByLotId(Long lotId);
+    ArrayList<Bet> getByLotIdOrderByPriceDesc(Long lotId);
 
 
 }

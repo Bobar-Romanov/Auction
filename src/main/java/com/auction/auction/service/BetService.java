@@ -1,15 +1,12 @@
 package com.auction.auction.service;
 
 
+import com.auction.auction.repo.*;
 import com.auction.auction.support.ResponseBet;
 import com.auction.auction.models.Bet;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.Subscribe;
 import com.auction.auction.models.User;
-import com.auction.auction.repo.BetRepo;
-import com.auction.auction.repo.LotRepo;
-import com.auction.auction.repo.SubscribeRepo;
-import com.auction.auction.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +24,10 @@ public class BetService {
     UserService userService;
     @Autowired
     SubscribeRepo subscribeRepo;
+    @Autowired
+    CommentRepo commentRepo;
+    @Autowired
+    LotService lotService;
 
 
     public String lastBet(Long lotId){
@@ -54,20 +55,18 @@ public class BetService {
         Lot curLot = lotRepo.lotById(longLotId);
 
         if(betValue >= curLot.getRedemptionPrice()){
-            userService.balaceManage(curLot.getOwnerId(), curUser.getId(), curLot.getRedemptionPrice());
-            curLot.setCurrentPrice(curLot.getRedemptionPrice());
-            curLot.setActive(false);
-            curLot.setOwnerId(curUser.getId());
-            deleteBetByLotId(longLotId);
-            deleteSubByLotId(longLotId);
-            lotRepo.save(curLot);
-            return new ResponseBet(true, Integer.toString(curLot.getRedemptionPrice()), username, "лот куплен" );
+
+            if(lotService.buyingProcess(curLot, curUser, curLot.getRedemptionPrice())) {
+                return new ResponseBet(true, Integer.toString(curLot.getRedemptionPrice()), username, "лот куплен");
+            }else {
+                return new ResponseBet(false, null, null, null);
+            }
         }
+
         Bet newBet = new Bet(longLotId,curUser.getId(), betValue);
         curLot.setCurrentPrice(betValue);
         lotRepo.save(curLot);
         betRepo.save(newBet);
-
 
        return new ResponseBet(true, value, username, null);
 
@@ -98,22 +97,4 @@ public class BetService {
         return null;
     }
 
-    public void deleteSubByLotId(Long lotId){
-        ArrayList<Subscribe> res = subscribeRepo.getByLotId(lotId);
-        if(res.isEmpty()){
-            return;
-        }
-        for(Subscribe sub : res){
-            subscribeRepo.delete(sub);
-        }
-    }
-    public void deleteBetByLotId(Long lotId){
-        ArrayList<Bet> res = betRepo.getByLotId(lotId);
-        if(res.isEmpty()){
-            return;
-        }
-        for(Bet bet : res){
-            betRepo.delete(bet);
-        }
-    }
 }
