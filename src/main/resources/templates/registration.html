@@ -9,25 +9,25 @@
 <body>
 <div class="banner"></div>
 <h1 align="center">Регистрация</h1>
-    <form action="/auction/registration" method="post">
+    <form action="/auction/registration" method="post" th:object="${userForm}">
 
         <div class="group">
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="email" name="email" id="email" th:value="${email}" required>
-            <pre th:text="${emailError}" class="error"></pre>
+            <input type="email" placeholder="email" th:field="*{email}" name="email" id="email"  required>
+            <pre th:errors="*{email}" class="error"></pre>
         </div>
 
         <div class="group">
             <label for="nickname"><b>Nickname:</b></label>
-            <input type="text" placeholder="nickname" maxlength="20" minlength="4" name="username" id="nickname" th:value="${username}"
+            <input type="text" placeholder="nickname" maxlength="20" th:field="*{username}" minlength="4" name="username" id="nickname"
                    onblur="checkLog()" required>
-            <pre th:text="${nameError}" class="error" id = "logError"></pre>
+            <pre th:errors="*{username}" class="error" id = "logError"></pre>
         </div>
 
         <div class="group">
             <label for="password"><b>Password:</b></label>
-            <input type="password" maxlength="20" minlength="8" placeholder="password" name="password" id="password" onblur="checkPass()" required>
-            <pre  id = "passError" class="error"></pre>
+            <input type="password" maxlength="20" minlength="8" th:field="*{password}"  placeholder="password" name="password" id="password" onblur="checkPass()" required>
+            <pre  id = "passError" th:errors="*{password}" class="error"></pre>
         </div>
 
         <div class="group">
@@ -38,6 +38,6 @@
             <p align="center">Уже есть учетная запись?<a href="/auction">Войти</a></p>
         </div>
     </form>
-    <script src="/js/registration.js"></script>
+
 </body>
 </html>

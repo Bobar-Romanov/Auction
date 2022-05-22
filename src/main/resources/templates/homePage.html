@@ -6,7 +6,7 @@
 
     <link th:href="@{/css/forTopMenu.css}" rel="stylesheet" />
 
-    <meta name="generator" content="Nicepage 4.9.5, nicepage.com">
+
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
 
@@ -23,6 +23,17 @@
                 <a th:href="'/auction/home/'+${lot.getId()}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-3-light-3 u-radius-6 u-btn-1">Хочу купить</a>
                 <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон | "></h5>
             </div>
+        </div>
+        <div th:if="${lots.totalPages > 0}" class="pagination">
+                    <pre th:text="|${lots.number + 1}/${lots.getTotalPages()}|"></pre>
+				    <span th:if="${lots.hasPrevious()}" th:switch="${lots.number-1 > 0}">
+				        <a th:case="${true}" th:href="@{'/auction/home?page=' + ${lots.number-1}}">Prev</a>
+				        <a th:case="*" th:href="@{/auction/home/}">Prev</a>
+				    </span>
+            <span th:if="${lots.hasNext()}">
+
+				        <a th:href="@{'/auction/home?page=' + ${lots.number+1}}">Next</a>
+				    </span>
         </div>
     </div>
 </section>

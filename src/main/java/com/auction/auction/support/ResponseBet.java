@@ -1,4 +1,4 @@
-package com.auction.auction.forms;
+package com.auction.auction.support;
 
 public class ResponseBet {
     private boolean type;

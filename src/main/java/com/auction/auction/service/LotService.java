@@ -8,6 +8,9 @@ import com.auction.auction.repo.ImageRepo;
 import com.auction.auction.repo.LotRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +40,7 @@ public class LotService  {
         return lotRepo.seller(lotId);
     }
     public String addLot(String name, String description, int startPrice, int redemptionPrice, Long userId,
-                       String endDate, MultipartFile mainImg, MultipartFile[] images, Model model) throws IOException {
+                       String endDate, MultipartFile mainImg, MultipartFile[] images) throws IOException {
 
         Lot lot = new Lot(name, description, startPrice, redemptionPrice, userId, endDate);
 
@@ -68,13 +71,18 @@ public class LotService  {
         return "redirect:/auction/home";
     }
 
-    public ArrayList<Lot> search(String search) {
-        ArrayList<Lot> byName = lotRepo.findByNameContains(search);
-        ArrayList<Lot> byDesc = lotRepo.findByDescriptionContains(search);
 
-        byDesc.removeAll(byName);
-        byName.addAll(byDesc);
-
-        return byName;
+    public Page<Lot> activeLotsPage(Pageable pageable){
+        return lotRepo.activeLotsPage(pageable);
     }
+
+
+    public Page<Lot> searchPage(String search, Pageable pageable) {
+        return lotRepo.PagefindByNameContains(search,pageable);
+    }
+
+
+
+
+
 }

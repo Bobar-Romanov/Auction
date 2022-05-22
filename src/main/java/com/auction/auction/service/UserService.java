@@ -39,32 +39,13 @@ public class UserService implements UserDetailsService {
 
 
 
-    public String addUser(String username, String email, String password, Model model){
+    public String addUser(String username, String email, String password){
 
         User user = new User(username, email, password);
-
-        if(userRepository.existsByEmail(email)){
-            model.addAttribute("emailError", "Данный email адрес уже зарегистрирован");
-            model.addAttribute("email", email);
-            model.addAttribute("username", username);
-            return "registration";
-        }
-        if(userRepository.existsByUsername(username)){
-            model.addAttribute("nameError", "Пользователь с таким именем уже существует");
-            model.addAttribute("email", email);
-            model.addAttribute("username", username);
-            return "registration";
-        }
-
         if (!saveUser(user)){
             return "registration";
         }
         return "sendEm";
-    }
-    public User getCurrentUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        return userRepository.findByUsername(currentPrincipalName);
     }
 
     public void balaceManage(Long sellerId, Long newOwnerId, int value){

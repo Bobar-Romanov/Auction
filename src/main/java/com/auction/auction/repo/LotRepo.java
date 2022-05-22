@@ -1,8 +1,9 @@
 package com.auction.auction.repo;
 
 
-import com.auction.auction.models.Comment;
 import com.auction.auction.models.Lot;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -30,6 +31,14 @@ public interface LotRepo extends JpaRepository<Lot, Long> {
 
       @Query(value = "SELECT l FROM Lot l WHERE l.id = ?1")
       Lot lotById(Long id);
+
+      /////pagination
+
+      @Query(value = "SELECT l FROM Lot l WHERE l.active = TRUE ORDER BY l.startDate desc")
+      Page<Lot> activeLotsPage(Pageable pageable);
+
+      @Query(value = "SELECT l FROM Lot l WHERE l.name LIKE %?1% UNION SELECT a FROM lot a WHERE a.description LIKE %?1%", nativeQuery = true)
+      Page<Lot> PagefindByNameContains(String search, Pageable pageable);
 
 
 }

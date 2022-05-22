@@ -11,6 +11,10 @@ import com.auction.auction.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,54 +50,31 @@ public class MainController {
     private String uploadPath;
 
     @GetMapping("/auction/home")
-    public String HomePage(Model model) {
-        Iterable<Lot> lots = lotService.getActiveLots();
-        model.addAttribute("lots", lots);
+    public String HomePage(Model model,
+                           @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable) {
+                Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
+        model.addAttribute("lots", lotsPages);
+
         return "homePage";
     }
 
 
         @PostMapping("/auction/home")
-        public String search (@RequestParam String search, Model model){
-
-            System.out.println(search);
-            ArrayList<Lot> lots = lotService.search(search);
-
-            model.addAttribute("lots", lots);
-
+        public String search (@RequestParam String search, Model model,
+                              @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable){
+            Page<Lot> lotsPages = lotService.searchPage(search,pageable);
+            model.addAttribute("lots", lotsPages);
             return "homePage";
 
     }
 
-
-    @GetMapping("/auction/home/add")
-    public String addLot(Model model) {
-        return "addLot";
-    }
-
-    @PostMapping ("/auction/home/add")
-    public String addLotPost(@AuthenticationPrincipal User user,
-                             @RequestParam String name,
-                             @RequestParam String description,
-                             @RequestParam int startPrice,
-                             @RequestParam int redemptionPrice,
-                             @RequestParam String endDate,
-                             @RequestParam("mainImg") MultipartFile mainImg,
-                             @RequestParam(value = "images",required = false) MultipartFile[] images,
-                             Model model) throws IOException {
-
-        return lotService.addLot(name, description, startPrice, redemptionPrice, user.getId(),endDate,mainImg,images, model);
-    }
-
     @GetMapping("/auction/home/{id}")
-    public String lotById(@AuthenticationPrincipal User user,@PathVariable(value = "id") long id, Model model) {
+    public String lotById(@PathVariable(value = "id") long id, Model model) {
 
         Optional<Lot> lot = lotRepo.findById(id);
         ArrayList<Lot> res = new ArrayList<>();
         lot.ifPresent(res::add);
         model.addAttribute("lot", res);
-
-
 
         ArrayList<Image> images = imgService.getImagesLotId(id);
         model.addAttribute("images", images);

@@ -22,6 +22,10 @@ public class User implements UserDetails {
     private boolean activated;
     private String activationCode;
 
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
     public String getActivationCode() {
         return activationCode;
     }
@@ -29,9 +33,6 @@ public class User implements UserDetails {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
 
     public int getBalance() {
         return balance;

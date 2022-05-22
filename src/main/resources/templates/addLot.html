@@ -13,7 +13,7 @@
     <link th:href="@{/css/stylesaddLot.css}" rel="stylesheet" />
     <link th:href="@{/css/forTopMenu.css}" rel="stylesheet" />
 
-    <meta name="generator" content="Nicepage 4.9.5, nicepage.com">
+
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
 
@@ -24,27 +24,30 @@
     <body class="u-body">
         <div th:insert = "topMenu.html::menu" ></div>
         <div class="banner"></div>
-        <form action="/auction/home/add" method="post" enctype="multipart/form-data">
+        <form action="/auction/home/add" method="post" enctype="multipart/form-data" th:object="${lotForm}">
         <div class="add">
             <div class="group2">
                 <label>Название: </label>
-                <input type = 'text' name="name" required>
+                <input type = 'text' name="name" required th:field="*{name}">
+                <pre th:errors="*{name}" class="error"></pre>
             </div>
 
             <div class="group2">
                 <label>Стартовая цена</label>
-                <input type="text" name="startPrice" required>
+                <input type="text" name="startPrice" required th:field="*{startPrice}">
+                <pre th:errors="*{startPrice}" class="error"></pre>
             </div>
 
             <div class="group2">
                 <label>Выкупная цена</label>
-                <input type="text" name="redemptionPrice" required>
+                <input type="text" name="redemptionPrice" required th:field="*{redemptionPrice}">
+                <pre th:errors="*{redemptionPrice}" class="error"></pre>
             </div>
 
             <div class="group2">
                 <label>фото: </label>
-                <input type = "file" name="mainImg"  id="mainUpload" required>
-                <p class="error" id="error1"></p>
+                <input type = "file" name="mainImg"  id="mainUpload" required th:field="*{mainImg}">
+                <p class="error" id="error1" th:errors="*{mainImg}"></p>
             </div>
 
             <div class="group3">
@@ -57,15 +60,17 @@
                     <img src="/ico/plus.png" class="delIco" onсlick="this.parentNode.parentNode.removeChild(this.parentNode);">
                 </li>
             </ul>
+            <pre th:errors="*{images}" class="error"></pre>
 
             <div class="group2">
                 <label>Описание: </label>
-                <textarea name="description"></textarea>
+                <textarea name="description" th:field="*{description}"></textarea>
             </div>
 
             <div class="group2">
                 <label>Дата окончания аукциона</label>
-                <input type="datetime-local" name="endDate" required>
+                <input type="datetime-local" name="endDate" required th:field="*{endDate}">
+                <pre th:errors="*{endDate}" class="error"></pre>
             </div>
 
             <div class="but">

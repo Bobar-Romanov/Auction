@@ -1,7 +1,7 @@
 package com.auction.auction.service;
 
 
-import com.auction.auction.forms.ResponseBet;
+import com.auction.auction.support.ResponseBet;
 import com.auction.auction.models.Bet;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.Subscribe;
