@@ -4,9 +4,9 @@
 }
 
 .u-section-1 .u-gallery-1 {
-  height: 268px;
-  width: 384px;
-  margin: 30px auto 60px 0;
+  height: 400px;
+  width: 530px;
+  margin: 30px auto 60px -10px;
 }
 
 .u-section-1 .u-carousel-indicators-1 {
@@ -47,5 +47,17 @@
   width: 40px;
   height: 40px;
   padding: 4px;
+}
+
+.submitB{
+  cursor: pointer;
+  background: #30a14e;
+  border-color: black;
+  border-radius: 10px/10px;
+  height: 40px;
+  width: 366px;
+
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 

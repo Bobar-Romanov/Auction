@@ -106,7 +106,7 @@
 
 .u-section-1 .u-text-7 {
   font-size: 1.25rem;
-  margin: 15px auto 0 199px;
+  margin: -30px auto 0 199px;
 }
 
 .u-section-1 .u-text-8 {
@@ -114,10 +114,14 @@
 }
 
 .u-section-1 .u-text-9 {
-  margin: -26px 170px 0 auto;
+  margin: -26px 170px 0 200px;
 }
 
 .u-section-1 .u-text-10 {
+  margin: -25px 357px 50px 300px;
+}
+
+.u-section-1 .u-text-101 {
   margin: 21px 357px 0 30px;
 }
 
