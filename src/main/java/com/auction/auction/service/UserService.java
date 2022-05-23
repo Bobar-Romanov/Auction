@@ -87,19 +87,10 @@ public class UserService implements UserDetailsService {
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "USER")));
-        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
         user.setActivationCode(UUID.randomUUID().toString());
         userRepository.save(user);
 
-        String message = String.format(
-                "Ммм свежее мясо! %s \n" +
-                        "Для активации аккаунта перейдите по ссылке: http://localhost:8080/activate/%s",
-                user.getUsername(),
-                user.getActivationCode()
-        );
-
-        mailSender.Send(user.getEmail(), "Account activation", message);
+        mailSender.SendRegMail(user);
 
         return true;
     }
