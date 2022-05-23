@@ -30,6 +30,7 @@
   margin: 0 30px 0 auto;
 
 }
+
 .plusIco > img{
   width: 45px;
   height: 45px;
@@ -42,7 +43,15 @@
   margin: -10px 30px 0 auto;
 
 }
+.heartIco:hover{
+  cursor: pointer;
 
+
+}
+.plusIco:hover{
+  cursor: pointer;
+
+}
 .heartIco:hover::after {
 
   position: relative; /* Абсолютное позиционирование */

@@ -2,6 +2,7 @@ package com.auction.auction.service;
 
 
 import com.auction.auction.models.Subscribe;
+import com.auction.auction.repo.LotRepo;
 import com.auction.auction.repo.SubscribeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ public class SubscribeService {
     SubscribeRepo subscribeRepo;
     @Autowired
     MailSender mailSender;
+    @Autowired
+    LotRepo lotrepo;
 
     public void notificationSend(String email, Long lotId, String username){
 
@@ -33,7 +36,7 @@ public class SubscribeService {
     }
     public String subscribe(Long lotId, Long userId){
 
-        if(subscribeRepo.existsByLotIdAndUserId(lotId, userId)){
+        if(subscribeRepo.existsByLotIdAndUserId(lotId, userId) || !lotrepo.getById(lotId).isActive()){
             return "false";
         }else{
             Subscribe subscribe = new Subscribe(lotId,userId);

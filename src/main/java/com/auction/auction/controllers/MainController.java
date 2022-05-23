@@ -30,11 +30,6 @@ import java.util.UUID;
 @Controller
 public class MainController {
 
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private SubscribeService subscribeService;
     @Autowired
     private LotRepo lotRepo;
     @Autowired
@@ -120,6 +115,12 @@ public class MainController {
         return user;
     }
 
+    @GetMapping("/auction/home/{id}/remove")
+    public String removeLot(@PathVariable(value = "id") long id) {           ;
+            lotService.deleteById(id);
+
+        return "redirect:/auction/home";
+    }
 
 
 }

@@ -1,20 +1,16 @@
 package com.auction.auction.service;
 
-import antlr.StringUtils;
 import com.auction.auction.models.Role;
 import com.auction.auction.models.User;
 import com.auction.auction.repo.RoleRepo;
 import com.auction.auction.repo.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +26,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     UserRepo userRepository;
     @Autowired
-    RoleRepo roleRepository;
+    RoleRepo roleRepo;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
@@ -90,7 +86,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        user.setRoles(Collections.singleton(new Role(1L, "USER")));
         //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         user.setActivationCode(UUID.randomUUID().toString());
