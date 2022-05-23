@@ -1,5 +1,6 @@
 package com.auction.auction.config;
 
+import com.auction.auction.models.Role;
 import com.auction.auction.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 
 @Configuration
@@ -40,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/css/*", "/js/*").permitAll()
+                .antMatchers("/auction/home/*/remove").hasAuthority("ADMIN")
                 .antMatchers("/auction/registration", "/auction ", "/activate/*").not().fullyAuthenticated()
                 .anyRequest().authenticated()
                 .and()
@@ -64,6 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.passwordEncoder(bCryptPasswordEncoder());
 
     }
+
+
 
 
 }

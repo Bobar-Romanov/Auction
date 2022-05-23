@@ -30,11 +30,6 @@ import java.util.UUID;
 @Controller
 public class MainController {
 
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private SubscribeService subscribeService;
     @Autowired
     private LotRepo lotRepo;
     @Autowired
@@ -61,7 +56,7 @@ public class MainController {
 
         @PostMapping("/auction/home")
         public String search (@RequestParam String search, Model model,
-                              @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable){
+                              @PageableDefault(sort = {},direction = Sort.Direction.DESC) Pageable pageable){
             Page<Lot> lotsPages = lotService.searchPage(search,pageable);
             model.addAttribute("lots", lotsPages);
             return "homePage";
@@ -120,6 +115,12 @@ public class MainController {
         return user;
     }
 
+    @GetMapping("/auction/home/{id}/remove")
+    public String removeLot(@PathVariable(value = "id") long id) {           ;
+            lotService.deleteById(id);
+
+        return "redirect:/auction/home";
+    }
 
 
 }

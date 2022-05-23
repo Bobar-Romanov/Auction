@@ -30,6 +30,7 @@
   margin: 0 30px 0 auto;
 
 }
+
 .plusIco > img{
   width: 45px;
   height: 45px;
@@ -42,9 +43,17 @@
   margin: -10px 30px 0 auto;
 
 }
+.heartIco:hover{
+  cursor: pointer;
 
+
+}
+.plusIco:hover{
+  cursor: pointer;
+
+}
 .heartIco:hover::after {
-  content: attr(data-title); /* Выводим текст */
+
   position: relative; /* Абсолютное позиционирование */
   left: 100%;
    /* Положение подсказки */
@@ -58,7 +67,7 @@
   border: 1px solid #333; /* Параметры рамки */
 }
 .plusIco:hover::after {
-  content: attr(data-title); /* Выводим текст */
+
   position: relative;  /* Абсолютное позиционирование */
   left: 100%;
   top: 50px; /* Положение подсказки */

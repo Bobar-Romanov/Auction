@@ -91,7 +91,9 @@ public class LotService  {
     public Page<Lot> activeLotsPage(Pageable pageable){
         return lotRepo.activeLotsPage(pageable);
     }
-
+    public void deleteById(Long lotId){
+        lotRepo.deleteById(lotId);
+    }
 
     public Page<Lot> searchPage(String search, Pageable pageable) {
         return lotRepo.PagefindByNameContains(search,pageable);
