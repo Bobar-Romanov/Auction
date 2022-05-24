@@ -43,6 +43,8 @@ public class LotService  {
     CommentRepo commentRepo;
     @Autowired
     MailSender mailSender;
+    @Autowired
+    SubscribeService subscribeService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -57,6 +59,7 @@ public class LotService  {
     public String getSeller(Long lotId){
         return lotRepo.seller(lotId);
     }
+
     public String addLot(String name, String description, int startPrice, int redemptionPrice, Long userId,
                        String endDate, MultipartFile mainImg, MultipartFile[] images) throws IOException {
 
@@ -84,7 +87,7 @@ public class LotService  {
                 imageRepo.save(image);
             }
         }
-
+        subscribeService.subscribe(lot.getId(), userId);
 
         return "redirect:/auction/home";
     }
@@ -130,7 +133,7 @@ public class LotService  {
             for(Lot lot : lots){
                ArrayList<Bet> bets = betRepo.getByLotIdOrderByPriceDesc(lot.getId());
                if(bets.isEmpty()){
-
+                   mailSender.SendNotifNBB(userRepo.getById(lot.getOwnerId()).getEmail(), lot.getName());
                    lotRepo.delete(lot);
                }
                for(Bet bet : bets){
