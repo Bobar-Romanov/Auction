@@ -41,6 +41,8 @@ public class LotService  {
     SubscribeRepo subscribeRepo;
     @Autowired
     CommentRepo commentRepo;
+    @Autowired
+    MailSender mailSender;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -100,11 +102,13 @@ public class LotService  {
     }
 
     public boolean buyingProcess(Lot curLot, User newOwner, int betValue){
-
+            User oldOwner = userRepo.getById(curLot.getOwnerId());
             if(userService.balaceManage(curLot.getOwnerId(),newOwner.getId(), betValue)) {
+            mailSender.SendNoticUSoldIt(oldOwner.getEmail(), curLot.getName());
             curLot.setCurrentPrice(betValue);
             curLot.setActive(false);
             curLot.setOwnerId(newOwner.getId());
+            mailSender.SendNotifSomeOneBuy(subscribeRepo.getSubEmailsByLotId(curLot.getId()), curLot.getName(), newOwner.getEmail());
             try {
                 subscribeRepo.deleteAll(subscribeRepo.getByLotId(curLot.getId()));
                 betRepo.deleteAll(betRepo.getByLotIdOrderByPriceDesc(curLot.getId()));
@@ -125,10 +129,16 @@ public class LotService  {
         if(!lots.isEmpty()){
             for(Lot lot : lots){
                ArrayList<Bet> bets = betRepo.getByLotIdOrderByPriceDesc(lot.getId());
+               if(bets.isEmpty()){
+
+                   lotRepo.delete(lot);
+               }
                for(Bet bet : bets){
                    if(buyingProcess(lot, userRepo.getById(bet.getOwnerId()), bet.getPrice())){
+                       mailSender.SendNotifUBuyIt(userRepo.getById(bet.getOwnerId()).getEmail(),lot.getName());
                        break;
                    }
+                   mailSender.SendNotifNotEnoughBalance(userRepo.getById(bet.getOwnerId()).getEmail(), lot.getName());
                }
             }
         }
