@@ -18,6 +18,7 @@
 }
 
 .u-section-1 .u-text-1 {
+  width: 500px;
   font-weight: 400;
   margin: 0 auto 0 0;
 }
@@ -151,3 +152,21 @@
     margin-right: 117px;
   }
 }
+
+ .pagination{
+   margin-left: 49%;
+ }
+
+ .goBack{
+   font-weight: 50;
+   width: 50px;
+   margin-left: 44%;
+   margin-top: 20px;
+ }
+
+ .goForv{
+   font-weight: 50;
+   width: 50px;
+   margin-left: 45%;
+   margin-top: -20px;
+ }

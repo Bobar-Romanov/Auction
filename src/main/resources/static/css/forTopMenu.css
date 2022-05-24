@@ -36877,11 +36877,15 @@ a.u-link.u-text-hover-grey-90:hover {
   min-height: 40px;
   margin: -52px auto 13px calc(((100% - 1140px) / 2) + 440px);
 }
-
 .u-header .u-search-icon-1 {
   width: 16px;
   height: 16px;
 }
+
+.u-text-admin{
+    margin-left: -60px;
+}
+
 @media (max-width: 1199px) {
   .u-header .u-group-1 {
     height: auto;

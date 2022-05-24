@@ -4,7 +4,7 @@
         <div class="u-container-layout u-container-layout-1">
             <a href="/auction/home/profile" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-1">Профиль</a>
             <a href="/logout" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-2">Выход</a>
-            <h4 class="u-custom-font u-font-roboto u-text u-text-menu" th:text = "|${user.getUsername()} Баланс: ${user.getBalance()} крон|"></h4>
+            <h4 class="u-custom-font u-font-roboto u-text u-text-menu" th:text = "|${user.getUsername()} Баланс:${user.getBalance()} крон|"></h4>
 
             <a href="/auction/home/add" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-3">Добавить лот</a>
             <a href="/auction/home/favorite" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-4">Избранное&nbsp;<span class="u-icon"><svg class="u-svg-content" viewBox="0 0 51.997 51.997" x="0px" y="0px" style="width: 1em; height: 1em;"><path d="M51.911,16.242C51.152,7.888,45.239,1.827,37.839,1.827c-4.93,0-9.444,2.653-11.984,6.905
@@ -14,7 +14,9 @@
             </a>
             <a href="/auction/home" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-5">Главная</a>
         </div>
-        <pre  sec:authorize="hasAuthority('ADMIN')" class="u-custom-font u-font-roboto u-text-admin" th:text="|admin|" ></pre>
+            <div class="Adm">
+                <pre  sec:authorize="hasAuthority('ADMIN')" class="u-custom-font u-font-roboto u-text-admin" th:text="|admin|" ></pre>
+            </div>
 
     </div><form action="/auction/home" method="post" class="u-border-1 u-border-grey-30 u-radius-5 u-search u-search-right u-white u-search-1">
         <button class="u-search-button" type="submit">

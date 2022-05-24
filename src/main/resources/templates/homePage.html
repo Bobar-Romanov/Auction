@@ -24,7 +24,11 @@
                 <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон | "></h5>
             </div>
         </div>
+
+
+
         <div th:if="${lots.totalPages > 0}" class="pagination">
+
                     <pre th:text="|${lots.number + 1}/${lots.getTotalPages()}|"></pre>
 				    <span th:if="${lots.hasPrevious()}" th:switch="${lots.number-1 > 0}">
 				        <a th:case="${true}" th:href="@{'/auction/home?page=' + ${lots.number-1}}">Prev</a>
