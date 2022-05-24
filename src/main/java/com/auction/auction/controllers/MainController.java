@@ -35,7 +35,7 @@ public class MainController {
     @Autowired
     private LotService lotService;
     @Autowired
-    private CommentRepo commentRepo;
+    private CommentService commentService;
     @Autowired
     private ImgService imgService;
     @Autowired
@@ -78,7 +78,7 @@ public class MainController {
         model.addAttribute("seller", seller);
         String lastBet = betService.lastBet(id);
         model.addAttribute("lastBet", lastBet);
-        ArrayList<Comment> comms = commentRepo.findByLotId(id);
+        ArrayList<Comment> comms = commentService.findByLotId(id);
         model.addAttribute("comments", comms);
 
         return "currentLot";
@@ -90,10 +90,10 @@ public class MainController {
                           @RequestParam String comment,
                           Model model){
 
-        Comment comment1 = new Comment(id,comment,user.getUsername());
-        commentRepo.save(comment1);
 
-        return "redirect:/auction/home/{id}";
+
+
+        return commentService.saveComm(id,comment,user);
     }
     @GetMapping("/auction/home/profile")
     public String profile(@AuthenticationPrincipal User user, Model model) {

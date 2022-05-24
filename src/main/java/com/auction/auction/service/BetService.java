@@ -28,7 +28,8 @@ public class BetService {
     CommentRepo commentRepo;
     @Autowired
     LotService lotService;
-
+    @Autowired
+    MailSender mailSender;
 
     public String lastBet(Long lotId){
         try {
@@ -65,6 +66,7 @@ public class BetService {
 
         Bet newBet = new Bet(longLotId,curUser.getId(), betValue);
         curLot.setCurrentPrice(betValue);
+        mailSender.SendNotifBet(subscribeRepo.getSubEmailsByLotId(longLotId), longLotId, curUser.getEmail());
         lotRepo.save(curLot);
         betRepo.save(newBet);
 
