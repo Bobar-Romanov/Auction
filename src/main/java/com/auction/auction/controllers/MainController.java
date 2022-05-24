@@ -41,6 +41,7 @@ public class MainController {
     @Autowired
     private BetService betService;
 
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -49,6 +50,7 @@ public class MainController {
                            @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable) {
                 Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
         model.addAttribute("lots", lotsPages);
+        ArrayList<String> em = new ArrayList<>();
 
         return "homePage";
     }
