@@ -4,6 +4,8 @@ package com.auction.auction.forms;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
+import java.util.Locale;
+
 public class LotForm {
     @NotBlank
     @Max(50)
@@ -12,10 +14,10 @@ public class LotForm {
     @Max(500)
     private String description;
 
-    @Positive(message = "Указыйвате цену правильно")
+
     private String startPrice;
 
-    @Positive(message = "Указыйвате цену правильно")
+
     private String redemptionPrice;
 
     @NotEmpty

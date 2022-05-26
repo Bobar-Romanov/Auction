@@ -73,7 +73,7 @@ public class AddLotController {
                 HttpServletResponse response) {
 
             ModelAndView modelAndView = new ModelAndView("error-size");
-            modelAndView.getModel().put("message", "File too large!");
+
             return modelAndView;
         }
     }

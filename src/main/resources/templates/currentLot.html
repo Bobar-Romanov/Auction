@@ -127,7 +127,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
        <div class="u-clearfix u-sheet u-sheet-1">
          <div class="u-container-style u-expanded-width u-group u-palette-1-light-3 u-group-1">
            <div class="u-container-layout u-container-layout-1">
-             <div class="u-form u-form-1" th:each="lot : ${lot}">
+             <div class="u-form u-form-1" >
                <form th:action="'/auction/home/'+ ${lot.getId()} + '/comm'" method="post"  class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"  name="form" style="padding: 10px;">
                  <div class="u-form-group u-form-message">
                    <label for="message-2081" class="u-label">Оставьте комментарий</label>

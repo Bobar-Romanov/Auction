@@ -45,7 +45,6 @@ public class MainController {
                            @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable) {
                 Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
         model.addAttribute("lots", lotsPages);
-        ArrayList<String> em = new ArrayList<>();
 
         return "homePage";
     }
@@ -81,11 +80,7 @@ public class MainController {
     @PostMapping("/auction/home/{id}/comm")
     public String addcomm(@AuthenticationPrincipal User user,
                           @PathVariable(value = "id") long id,
-                          @RequestParam String comment,
-                          Model model){
-
-
-
+                          @RequestParam String comment){
 
         return commentService.saveComm(id,comment,user);
     }
