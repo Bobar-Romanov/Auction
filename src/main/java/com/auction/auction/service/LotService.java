@@ -91,7 +91,7 @@ public class LotService  {
 
         return "redirect:/auction/home";
     }
-
+    public Lot getById(Long id){return lotRepo.getById(id);}
 
     public Page<Lot> activeLotsPage(Pageable pageable){
         return lotRepo.activeLotsPage(pageable);
@@ -148,4 +148,7 @@ public class LotService  {
 
     }
 
+    public ArrayList<Lot> findByActiveFalseAndOwnerId(Long id) {
+        return lotRepo.findByActiveFalseAndOwnerId(id);
+    }
 }

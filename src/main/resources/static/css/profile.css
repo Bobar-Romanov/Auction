@@ -51,13 +51,19 @@
 }
 
 .u-section-1 .u-text-6 {
-  margin: 20px 46px 0 586px;
+  margin: 20px 46px 0 0px;
+    width: 25%;
+  display: inline-block;
+  float: right;
 }
 
 .u-section-1 .u-image-1 {
-  width: 546px;
-  height: 383px;
-  margin: -20px auto 0 10px;
+  text-align: right;
+  width: 65%;
+  height: 80%;
+  margin: 20px auto -100% 10px;
+  display: inline-block;
+  float: left;
 }
 
 @media (max-width: 1199px) {

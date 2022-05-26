@@ -4,13 +4,13 @@ import com.auction.auction.models.Comment;
 import com.auction.auction.models.Image;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
-import com.auction.auction.repo.CommentRepo;
 import com.auction.auction.repo.LotRepo;
-import com.auction.auction.repo.SubscribeRepo;
-import com.auction.auction.service.*;
+import com.auction.auction.service.BetService;
+import com.auction.auction.service.CommentService;
+import com.auction.auction.service.ImgService;
+import com.auction.auction.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,19 +19,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    private LotRepo lotRepo;
+
     @Autowired
     private LotService lotService;
     @Autowired
@@ -68,11 +63,8 @@ public class MainController {
     @GetMapping("/auction/home/{id}")
     public String lotById(@PathVariable(value = "id") long id, Model model) {
 
-        Optional<Lot> lot = lotRepo.findById(id);
-        ArrayList<Lot> res = new ArrayList<>();
-        lot.ifPresent(res::add);
-        model.addAttribute("lot", res);
-
+        Lot lot = lotService.getById(id);
+        model.addAttribute("lot", lot);
         ArrayList<Image> images = imgService.getImagesLotId(id);
         model.addAttribute("images", images);
         model.addAttribute("total", images.size() + 1);
@@ -99,7 +91,7 @@ public class MainController {
     }
     @GetMapping("/auction/home/profile")
     public String profile(@AuthenticationPrincipal User user, Model model) {
-        ArrayList<Lot> lots = lotRepo.findByActiveFalseAndOwnerId(user.getId());
+        ArrayList<Lot> lots = lotService.findByActiveFalseAndOwnerId(user.getId());
         model.addAttribute("lots", lots );
         model.addAttribute("user", user );
         return "profile" ;

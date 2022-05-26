@@ -36838,10 +36838,11 @@ a.u-link.u-text-hover-grey-90:hover {
   padding: 8px 19px 8px 18px;
 }
 
-.u-header .u-text-1 {
+.u-header .u-text-menu {
   margin: -33px 21px 0 60%;
-
-    width: 350px;
+    font-size: 20px;
+  width: auto;
+    max-width: 300px;
 }
 
 .u-header .u-btn-3 {
@@ -36849,7 +36850,7 @@ a.u-link.u-text-hover-grey-90:hover {
   font-size: 0.9375rem;
   font-weight: 500;
   background-image: none;
-  margin: -36px auto 0 334px;
+  margin: -30px auto 0 334px;
   padding: 8px 19px 8px 18px;
 }
 
