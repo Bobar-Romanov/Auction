@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>[[#{login.logon}]]</title>
     <link th:href="@{/css/styleslogOn.css}" rel="stylesheet" type="text/css" />
     <meta http-equiv="Content-Type" content="text/css; charset=UTF-8" />
 </head>
@@ -11,35 +11,35 @@
 
 <div class="banner"></div>
 
-<h1 align="center">Вход</h1>
+<h1 align="center">[[#{login.logon}]]</h1>
 
 <div class="loGout" th:if ="${#request.getParameter('logout')}" >
-   Вы вышли из аккаунта
+    [[#{login.exitt}]]
 </div>
 
 <form action="/auction" method="post">
 
 
     <div class="group1">
-        <label for="email"><b>Email:</b></label>
+        <label for="email"><b>[[#{login.ema}]]</b></label>
         <input type="email" placeholder="email" name="email" id="email" required>
     </div>
 
     <div class="group1">
-        <label for="password"><b>Password:</b></label>
+        <label for="password"><b>[[#{login.pass}]]</b></label>
         <input type="password" placeholder="password" name="password" id="password" required>
     </div>
 
     <div class="group1">
-        <center><button type="submit" class="registerbtn">Войти</button></center>
+        <center><button type="submit" class="registerbtn">[[#{login.ent}]]</button></center>
     </div>
 
     <div class="Err" th:if ="${#request.getParameter('error')}" >
-        Неправильно указан Email и/или пароль
+        [[#{login.wrong}]]
     </div>
 
     <div class="signin1">
-        <p align="center">Еще нет учетной записи? <a href="/auction/registration">Зарегистрироваться</a></p>
+        <p align="center">[[#{login.noProf}]] <a href="/auction/registration">[[#{login.reg}]]</a></p>
     </div>
 
 

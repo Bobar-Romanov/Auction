@@ -31,13 +31,16 @@
 
                     <pre th:text="|${lots.number + 1}/${lots.getTotalPages()}|"></pre>
 				    <span th:if="${lots.hasPrevious()}" th:switch="${lots.number-1 > 0}">
-				        <a th:case="${true}" th:href="@{'/auction/home?page=' + ${lots.number-1}}">Prev</a>
-				        <a th:case="*" th:href="@{/auction/home/}">Prev</a>
+				        <a th:case="${true}" th:href="@{'/auction/home?page=' + ${lots.number-1}}">[[#{homePage.stepB}]]</a>
+                        <div class="stepB">
+				            <a th:case="*" th:href="@{/auction/home/}">Prev</a>
+                        </div>
 				    </span>
-            <span th:if="${lots.hasNext()}">
-
-				        <a th:href="@{'/auction/home?page=' + ${lots.number+1}}">Next</a>
-				    </span>
+                    <span th:if="${lots.hasNext()}">
+                        <div class="stepF">
+				            <a th:href="@{'/auction/home?page=' + ${lots.number+1}}">[[#{homePage.stepF}]]</a>
+                        </div>
+                    </span>
         </div>
     </div>
 </section>

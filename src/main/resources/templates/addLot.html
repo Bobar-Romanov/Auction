@@ -23,25 +23,25 @@
         <form action="/auction/home/add" method="post" enctype="multipart/form-data" th:object="${lotForm}">
         <div class="add">
             <div class="group2">
-                <label>Название: </label>
+                <label>[[#{addLot.nameL}]] </label>
                 <input type = 'text' name="name" required th:field="*{name}">
                 <pre th:errors="*{name}" class="error"></pre>
             </div>
 
             <div class="group2">
-                <label>Стартовая цена</label>
+                <label>[[#{addLot.stPrice}]]</label>
                 <input type="text" name="startPrice" required th:field="*{startPrice}">
                 <pre th:errors="*{startPrice}" class="error"></pre>
             </div>
 
             <div class="group2">
-                <label>Выкупная цена</label>
+                <label>[[#{addLot.buyPrice}]]</label>
                 <input type="text" name="redemptionPrice" required th:field="*{redemptionPrice}">
                 <pre th:errors="*{redemptionPrice}" class="error"></pre>
             </div>
 
             <div class="group2">
-                <label>фото: </label>
+                <label>[[#{addLot.pic}]] </label>
                 <input type = "file" name="mainImg"  id="mainUpload" required th:field="*{mainImg}">
                 <p class="error" id="error1" th:errors="*{mainImg}"></p>
             </div>
@@ -59,18 +59,18 @@
             <pre th:errors="*{images}" class="error"></pre>
 
             <div class="group2">
-                <label>Описание: </label>
+                <label>[[#{addLot.describe}]] </label>
                 <textarea name="description" th:field="*{description}"></textarea>
             </div>
 
             <div class="group2">
-                <label>Дата окончания аукциона</label>
+                <label>[[#{addLot.date}]]</label>
                 <input type="datetime-local" name="endDate" required th:field="*{endDate}">
                 <pre th:errors="*{endDate}" class="error"></pre>
             </div>
 
             <div class="but">
-                <button type="submit" class="enterbtn" id="sub">Выставить</button>
+                <button type="submit" class="enterbtn" id="sub">[[#{addLot.ent}]]</button>
             </div>
         </div>
         </form>

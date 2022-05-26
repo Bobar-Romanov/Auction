@@ -3,39 +3,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация</title>
+    <title>[[#{registration.regg}]]</title>
     <link th:href="@{/css/stylesStart.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="banner"></div>
-<h1 align="center">Регистрация</h1>
+<h1 align="center">[[#{registration.regg}]]</h1>
     <form action="/auction/registration" method="post" th:object="${userForm}">
 
         <div class="group">
-            <label for="email"><b>Email:</b></label>
+            <label for="email"><b>[[#{registration.ema}]]</b></label>
             <input type="email" placeholder="email" th:field="*{email}" name="email" id="email"  required>
             <pre th:errors="*{email}" class="error"></pre>
         </div>
 
         <div class="group">
-            <label for="nickname"><b>Nickname:</b></label>
+            <label for="nickname"><b>[[#{registration.nick}]]</b></label>
             <input type="text" placeholder="nickname" maxlength="20" th:field="*{username}" minlength="4" name="username" id="nickname"
                    onblur="checkLog()" required>
             <pre th:errors="*{username}" class="error" id = "logError"></pre>
         </div>
 
         <div class="group">
-            <label for="password"><b>Password:</b></label>
+            <label for="password"><b>[[#{registration.pass}]]</b></label>
             <input type="password" maxlength="20" minlength="8" th:field="*{password}"  placeholder="password" name="password" id="password" onblur="checkPass()" required>
             <pre  id = "passError" th:errors="*{password}" class="error"></pre>
         </div>
 
         <div class="group">
-            <center><button type="submit" class="registerbtn" id="regbutton">Зарегистрироваться</button></center>
+            <center><button type="submit" class="registerbtn" id="regbutton">[[#{registration.reg}]]</button></center>
         </div>
 
         <div class="signin">
-            <p align="center">Уже есть учетная запись?<a href="/auction">Войти</a></p>
+            <p align="center">[[#{registration.yesProf}]]<a href="/auction">[[#{registration.ent}]]</a></p>
         </div>
     </form>
 
