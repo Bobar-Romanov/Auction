@@ -78,7 +78,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                       </a>
                </div>
                   </div>
-                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2" th:text="|продавец: ${seller} |"></p>
+                  <p class="u-text u-text-default u-text-palette-5-dark-1 u-text-2" th:text="|#{currentLot.seller}: ${seller} |"></p>
                   <p class="u-text u-text-4" th:text="${lot.getDescription()}" ></p>
                 </div>
               </div>
@@ -90,19 +90,19 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                       <div class="plusIco"><img src="/ico/plus.png" id="plusIco" hidden onclick="sub()" ></div>
                     </div>
 
-                  <p class="u-text u-text-default u-text-6" th:text="|Последняя ставка:|"  ></p>
+                  <p class="u-text u-text-default u-text-6" th:text="|#{currentLot.lastBet}|"  ></p>
                     <p class="u-text u-text-default u-text-7" id="currentBetOwner" th:text = "${lastBet}" ></p>
-                  <p class="u-text u-text-default u-text-8" th:text="|Текущая стоимость:|"></p>
+                  <p class="u-text u-text-default u-text-8" th:text="|#{currentLot.currentBet}|"></p>
                     <p class="u-text u-text-default u-text-9" id="currentBet" th:text = "${lot.getCurrentPrice()}" ></p>
-                    <p class="u-text u-text-default u-text-10" >крон</p>
-                  <p class="u-text u-text-101">Сделайте ставку!</p>
+                    <p class="u-text u-text-default u-text-10" >[[#{kron}]]</p>
+                  <p class="u-text u-text-101">[[#{currentLot.makeBet}]]</p>
                   <div class="u-form u-form-1">
                       <div class="u-form-group u-label-none">
                         <label for="betInput" class="u-form-control-hidden u-label"></label>
                         <input type="text" id="betInput" name="bet" class="u-border-2 u-border-black u-input u-input-rectangle u-white u-input-1" required="required" maxlength="10">
                       </div>
                       <div class="u-form-group u-form-submit">
-                        <button type="submit" class="submitB" id="submitBet"> повысить </button>
+                        <button type="submit" class="submitB" id="submitBet">[[#{currentLot.up}]]</button>
                           <p th:text="${lot.getId()}" hidden id="lotId"></p>
                       </div>
                     <p class="u-text u-text-default u-text-13" id="msg"></p>
@@ -125,7 +125,7 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
     </section>
      <section class="u-clearfix u-section-2" id="sec-acd9">
        <div class="u-clearfix u-sheet u-sheet-1">
-         <div class="u-container-style u-expanded-width u-group u-palette-1-light-3 u-group-1">
+         <div class="u-container-style u-expanded-width u-group u-palette-1-light-3 u-group-1" id="commDiv">
            <div class="u-container-layout u-container-layout-1">
              <div class="u-form u-form-1" >
                <form th:action="'/auction/home/'+ ${lot.getId()} + '/comm'" method="post"  class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"  name="form" style="padding: 10px;">
@@ -133,15 +133,15 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                    <label for="message-2081" class="u-label">Оставьте комментарий</label>
                    <textarea rows="4" cols="50" id="message-2081" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" maxlength="300" placeholder="написать комментарий..."></textarea>
                  </div>
-                   <input hidden>
                  <div class="u-align-left u-form-group u-form-submit">
-                   <button type="submit" >Отправить</button>
+                   <button type="submit" id="subCom">Отправить</button>
                  </div>
                </form>
              </div>
            </div>
          </div>
-         <div class="u-container-style u-group u-palette-1-light-3 u-group-2" th:each="comment : ${comments}">
+           <pre id="curUs" hidden >[[${#httpServletRequest.remoteUser}]]</pre>
+         <div class="u-container-style u-group u-palette-1-light-3 u-group-2"  th:each="comment : ${comments}">
            <div class="u-container-layout u-container-layout-2">
              <h4 class="u-text u-text-default u-text-1" th:text = "${comment.getUsername()}"></h4>
              <p class="u-custom-font u-font-merriweather u-text u-text-2" th:text = "${comment.getComment()}"></p>

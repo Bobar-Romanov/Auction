@@ -8,9 +8,11 @@ import com.auction.auction.models.Lot;
 import com.auction.auction.models.Subscribe;
 import com.auction.auction.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 @Service
 public class BetService {
@@ -30,6 +32,8 @@ public class BetService {
     LotService lotService;
     @Autowired
     MailSender mailSender;
+    @Autowired
+    MessageSource messageSource;
 
     public String lastBet(Long lotId){
         try {
@@ -58,7 +62,7 @@ public class BetService {
         if(betValue >= curLot.getRedemptionPrice()){
 
             if(lotService.buyingProcess(curLot, curUser, curLot.getRedemptionPrice())) {
-                return new ResponseBet(true, Integer.toString(curLot.getRedemptionPrice()), username, "лот куплен");
+                return new ResponseBet(true, Integer.toString(curLot.getRedemptionPrice()), username, messageSource.getMessage("betservice.buy",null, new Locale("ru")));
             }else {
                 return new ResponseBet(false, null, null, null);
             }
@@ -80,20 +84,20 @@ public class BetService {
             Lot curLot =  lotRepo.lotById(id);
 
             if(curUser.getId().equals(curLot.getOwnerId())){
-                return "Вы являетесь продавцом";
+                return messageSource.getMessage("betservice.WrongBet",null, new Locale("ru"));
             }
             if(betValue <= curLot.getCurrentPrice()){
-                return "Ставка - положительное число, не менее текущей ставки";
+                return messageSource.getMessage("betservice.UASeller",null, new Locale("ru"));
             }
             if(betValue >= curUser.getBalance()){
-                return "На балансе недостаточно средств";
+                return messageSource.getMessage("betservice.NEB",null, new Locale("ru"));
             }
             if(!curLot.isActive()){
-                return "Лот уже куплен";
+                return messageSource.getMessage("betservice.alreadybuy",null, new Locale("ru"));
             }
 
         }catch (NumberFormatException e){
-            return "Ставка - положительное число, не менее текущей ставки";
+            return messageSource.getMessage("betservice.WrongBet",null, new Locale("ru"));
         }
 
         return null;

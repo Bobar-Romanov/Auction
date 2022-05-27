@@ -6,9 +6,8 @@
 
     <link th:href="@{/css/profile.css}" rel="stylesheet" />
     <link th:href="@{/css/forTopMenu.css}" rel="stylesheet" />
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="home.js" defer=""></script>
-    <meta name="generator" content="Nicepage 4.9.5, nicepage.com">
+
+
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
 
@@ -20,15 +19,15 @@
     <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-container-style u-group u-palette-1-light-3 u-group-1">
             <div class="u-container-layout u-container-layout-1">
-                <p class="u-text u-text-1" th:text="|Ваше имя: ${user.getUsername()}|" ></p>
-                <p class="u-text u-text-2" th:text="|Ваш email: ${user.getEmail()} |"></p>
-                <p class="u-text u-text-3" th:text="|Ваш баланс: ${user.getBalance()} крон|"></p>
+                <p class="u-text u-text-1" th:text="|#{profile.yrname}: ${user.getUsername()}|" ></p>
+                <p class="u-text u-text-2" th:text="|#{profile.email}: ${user.getEmail()} |"></p>
+                <p class="u-text u-text-3" th:text="|#{profile.yrbalance}: ${user.getBalance()} крон|"></p>
             </div>
         </div>
         <div class="u-container-style u-group u-palette-1-light-3 u-group-2" th:each="lot : ${lots}">
             <div class="u-container-layout u-container-layout-2">
                 <h4 class="u-text u-text-default u-text-4" th:text="${lot.getName()}"></h4>
-                <h4 class="u-text u-text-default u-text-5" th:text="|Стоимость: ${lot.getCurrentPrice()} крон|"></h4>
+                <h4 class="u-text u-text-default u-text-5" th:text="|#{profile.price}: ${lot.getCurrentPrice()} #{kron}|"></h4>
                 <p class="u-text u-text-6" th:text="${lot.getDescription()}"></p>
                 <img class="u-image u-image-default u-image-1"  th:src="'/img/' + ${lot.getMainImg()}" alt="" data-image-width="1280" data-image-height="853">
             </div>

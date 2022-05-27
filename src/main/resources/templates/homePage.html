@@ -20,8 +20,8 @@
             <div class="u-container-layout u-container-layout-1">
                 <h3 class="u-custom-font u-font-roboto u-text u-text-default u-text-1" th:text="${lot.getName()}"></h3>
                 <img class="u-image u-image-default u-image-1" th:src="'/img/' + ${lot.getMainImg()}" alt="" data-image-width="480" data-image-height="720">
-                <a th:href="'/auction/home/'+${lot.getId()}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-3-light-3 u-radius-6 u-btn-1">Хочу купить</a>
-                <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} крон | "></h5>
+                <a th:href="'/auction/home/'+${lot.getId()}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-palette-3-light-3 u-radius-6 u-btn-1">[[#{homepage.wannabuy}]]</a>
+                <h5 class="u-custom-font u-font-roboto u-text u-text-2" th:text="|${lot.getCurrentPrice()} #{kron}| "></h5>
             </div>
         </div>
 

@@ -49,10 +49,6 @@ public class LotService  {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public ArrayList<Lot> getActiveLots(){
-       return lotRepo.activeLots();
-    }
-
     public ArrayList<Lot> getFavoriteLots(Long userId){
         return lotRepo.favoriteLots(userId);
     }
