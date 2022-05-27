@@ -56,6 +56,7 @@ public class MailSender {
     }
     public void SendNotifBet(ArrayList<String> emails, Long lotId, String ignore){
         if(emails.isEmpty()){
+            System.out.println("ALLO");
             return;
         }
         String message = String.format(

@@ -54,7 +54,7 @@ public class User implements UserDetails {
         this.username = nick;
         this.email = email;
         this.password = pass;
-        this.balance = 993;
+        this.balance = 9999;
         this.activated = false;
     }
 
