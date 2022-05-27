@@ -1,0 +1,3 @@
+--Впишите вместо 'your@email', 'your_password', 'your_name', емай, пароль и никнейм соответсвенно, затем измените расширение файла на sql и запустите--
+INSERT INTO `auction`.`user` (`id`, `email`, `password`, `username`, `activated`, `balance`) VALUES ('1', 'your@email', 'your_password', 'your_name', b'1', '0');
+INSERT INTO `auction`.`user_roles` (`user_id`, `roles_id`) VALUES ('1', '2');
