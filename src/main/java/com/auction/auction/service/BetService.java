@@ -70,9 +70,10 @@ public class BetService {
 
         Bet newBet = new Bet(longLotId,curUser.getId(), betValue);
         curLot.setCurrentPrice(betValue);
-        mailSender.SendNotifBet(subscribeRepo.getSubEmailsByLotId(longLotId), longLotId, curUser.getEmail());
+
         lotRepo.save(curLot);
         betRepo.save(newBet);
+        mailSender.SendNotifBet(subscribeRepo.getSubEmailsByLotId(longLotId), longLotId, curUser.getEmail());
 
        return new ResponseBet(true, value, username, null);
 
