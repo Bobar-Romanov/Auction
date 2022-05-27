@@ -34,6 +34,7 @@ function unSub(){
 }
 
 let commBtn = document.querySelector('#subCom')
+
 function comFun(){
    let username = document.querySelector('#curUs').textContent;
    let text = document.querySelector('#message-2081').value;
@@ -62,8 +63,7 @@ function comFun(){
       div2.classList.add('u-group-2')
       div2.appendChild(div);
       commDiv.insertAdjacentElement('afterend', div2);
-      let textarea = document.querySelector('#message-2081');
-      textarea.value = "";
+
    }
 }
 
