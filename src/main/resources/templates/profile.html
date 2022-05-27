@@ -21,7 +21,7 @@
             <div class="u-container-layout u-container-layout-1">
                 <p class="u-text u-text-1" th:text="|#{profile.yrname}: ${user.getUsername()}|" ></p>
                 <p class="u-text u-text-2" th:text="|#{profile.email}: ${user.getEmail()} |"></p>
-                <p class="u-text u-text-3" th:text="|#{profile.yrbalance}: ${user.getBalance()} крон|"></p>
+                <p class="u-text u-text-3" th:text="|#{profile.yrbalance}: ${user.getBalance()} #{kron}|"></p>
             </div>
         </div>
         <div class="u-container-style u-group u-palette-1-light-3 u-group-2" th:each="lot : ${lots}">

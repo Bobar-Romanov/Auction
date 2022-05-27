@@ -33,7 +33,7 @@
                     <div class="u-carousel-inner u-gallery-inner" role="listbox" >
 
                       <div class=" u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-1">
-                        <div class="u-back-slide" data-image-width="530" data-image-height="400">
+                        <div class="u-back-slide" data-image-width="530" data-image-height="500">
                           <img class="u-back-image u-expanded" th:src="'/img/' + ${lot.getMainImg()}">
                         </div>
                         <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1">
@@ -108,14 +108,15 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                     <p class="u-text u-text-default u-text-13" id="msg"></p>
                   </div>
                   <br>
-                  <p class="u-text u-text-default u-text-131"th:text="|Выкупная стоимость: ${lot.getRedemptionPrice()} крон|"></p>
+                  <p class="u-text u-text-default u-text-131"th:text="|#{currentLot.buyPrice} ${lot.getRedemptionPrice()} крон|"></p>
                   <p class="u-text u-text-default u-text-14" th:text="${lot.getStartDateString()}" ></p>
-                  <p class="u-text u-text-default u-text-15">Дата начала:</p>
+                  <p class="u-text u-text-default u-text-15">[[#{currentLot.startDate}]]</p>
                   <p class="u-text u-text-default u-text-16" th:text="${lot.getEndDateString()}" ></p>
-                  <p class="u-text u-text-default u-text-17">Дата окончания:</p>
-                    <a sec:authorize="hasAuthority('ADMIN')" th:href="'/auction/home/'+${lot.getId()} + '/remove'" th:text="|удалить|" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font
+                  <p class="u-text u-text-default u-text-17">[[#{currentLot.endDate}]]</p>
+                    <div class="deletting">
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="'/auction/home/'+${lot.getId()} + '/remove'" th:text="|#{currentLot.del}|" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-custom-font
                     u-font-montserrat u-hover-palette-3-light-2 u-radius-6 u-btn-2"></a>
-
+                    </div>
                 </div>
               </div>
             </div>
@@ -130,11 +131,11 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
              <div class="u-form u-form-1" >
                <form th:action="'/auction/home/'+ ${lot.getId()} + '/comm'" method="post"  class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"  name="form" style="padding: 10px;">
                  <div class="u-form-group u-form-message">
-                   <label for="message-2081" class="u-label">Оставьте комментарий</label>
+                   <label for="message-2081" class="u-label">[[#{currentLot.comm}]]</label>
                    <textarea rows="4" cols="50" id="message-2081" name="comment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" maxlength="300" placeholder="написать комментарий..."></textarea>
                  </div>
                  <div class="u-align-left u-form-group u-form-submit">
-                   <button type="submit" id="subCom">Отправить</button>
+                   <button type="submit" id="subCom">[[#{currentLot.send}]]</button>
                  </div>
                </form>
              </div>

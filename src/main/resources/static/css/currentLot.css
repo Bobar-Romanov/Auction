@@ -4,9 +4,9 @@
 }
 
 .u-section-1 .u-gallery-1 {
-  height: 400px;
+  height: 600px;
   width: 530px;
-  margin: 30px auto 60px -10px;
+  margin: 30px auto 0 -10px;
 }
 
 .u-section-1 .u-carousel-indicators-1 {
@@ -61,3 +61,6 @@
   margin-bottom: 20px;
 }
 
+.deletting{
+  margin-left: 5%;
+}
