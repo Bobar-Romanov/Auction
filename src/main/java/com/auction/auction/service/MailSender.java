@@ -4,6 +4,7 @@ import com.auction.auction.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,11 @@ public class MailSender {
         mailMessage.setSubject(messageSource.getMessage("mail.sendreg.subject",null, new Locale("ru")));
         mailMessage.setText(message);
 
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+        }catch (MailSendException e){
+            return;
+        }
     }
     public void SendNotifComm(ArrayList<String> emails, Long lotId, String ignore){
         if(emails.isEmpty()){
@@ -50,13 +55,16 @@ public class MailSender {
         for(String email : emails){
             if(!email.equals(ignore)){
                mailMessage.setTo(email);
-               mailSender.send(mailMessage);
+                try {
+                    mailSender.send(mailMessage);
+                }catch (MailSendException e){
+                    continue;
+                }
             }
         }
     }
     public void SendNotifBet(ArrayList<String> emails, Long lotId, String ignore){
         if(emails.isEmpty()){
-            System.out.println("ALLO");
             return;
         }
         String message = String.format(
@@ -70,7 +78,11 @@ public class MailSender {
         for(String email : emails){
             if(!email.equals(ignore)){
                 mailMessage.setTo(email);
-                mailSender.send(mailMessage);
+                try {
+                    mailSender.send(mailMessage);
+                }catch (MailSendException e){
+                    continue;
+                }
             }
         }
     }
@@ -89,7 +101,11 @@ public class MailSender {
         for(String email : emails){
             if(!email.equals(ignore)){
                 mailMessage.setTo(email);
-                mailSender.send(mailMessage);
+                try {
+                    mailSender.send(mailMessage);
+                }catch (MailSendException e){
+                    continue;
+                }
             }
         }
     }
@@ -103,7 +119,11 @@ public class MailSender {
         mailMessage.setSubject(messageSource.getMessage("mail.notif.Ubuy.subject",null, new Locale("ru")));
         mailMessage.setText(message);
         mailMessage.setTo(email);
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+        }catch (MailSendException e){
+            return;
+        }
 
     }
     public void SendNotifNotEnoughBalance(String email, String lotName){
@@ -116,7 +136,11 @@ public class MailSender {
         mailMessage.setSubject(messageSource.getMessage("mail.notif.NEB.subject",null, new Locale("ru")));
         mailMessage.setText(message);
         mailMessage.setTo(email);
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+        }catch (MailSendException e){
+            return;
+        }
     }
     public void SendNoticUSoldIt(String email, String lotName){
         String message = String.format(
@@ -128,7 +152,11 @@ public class MailSender {
         mailMessage.setSubject(messageSource.getMessage("mail.notif.USold.subject",null, new Locale("ru")));
         mailMessage.setText(message);
         mailMessage.setTo(email);
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+        }catch (MailSendException e){
+            return;
+        }
     }
     public void SendNotifNBB(String email, String lotName){
         String message = String.format(
@@ -140,7 +168,11 @@ public class MailSender {
         mailMessage.setSubject(messageSource.getMessage("mail.notif.NBB.subject",null, new Locale("ru")));
         mailMessage.setText(message);
         mailMessage.setTo(email);
-        mailSender.send(mailMessage);
+        try {
+            mailSender.send(mailMessage);
+        }catch (MailSendException e){
+            return;
+        }
     }
 
 

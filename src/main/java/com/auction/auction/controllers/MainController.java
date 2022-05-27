@@ -4,7 +4,6 @@ import com.auction.auction.models.Comment;
 import com.auction.auction.models.Image;
 import com.auction.auction.models.Lot;
 import com.auction.auction.models.User;
-import com.auction.auction.repo.LotRepo;
 import com.auction.auction.service.BetService;
 import com.auction.auction.service.CommentService;
 import com.auction.auction.service.ImgService;
@@ -21,7 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -45,6 +43,7 @@ public class MainController {
                            @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable) {
                 Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
         model.addAttribute("lots", lotsPages);
+
 
         return "homePage";
     }
@@ -88,7 +87,6 @@ public class MainController {
     public String profile(@AuthenticationPrincipal User user, Model model) {
         ArrayList<Lot> lots = lotService.findByActiveFalseAndOwnerId(user.getId());
         model.addAttribute("lots", lots );
-        model.addAttribute("user", user );
         return "profile" ;
     }
 
@@ -105,7 +103,7 @@ public class MainController {
     }
 
     @GetMapping("/auction/home/{id}/remove")
-    public String removeLot(@PathVariable(value = "id") long id) {           ;
+    public String removeLot(@PathVariable(value = "id") long id) {
             lotService.deleteById(id);
 
         return "redirect:/auction/home";
