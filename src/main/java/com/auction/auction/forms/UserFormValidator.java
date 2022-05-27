@@ -35,7 +35,6 @@ public class UserFormValidator implements Validator {
         Pattern p = Pattern.compile("[^a-z0-9A-Z.,!_-]");
         Matcher usernamematch = p.matcher(username);
         if(usernamematch.find()){
-
             errors.rejectValue("username", "", messageSource.getMessage("uservalid.username.sym",null, new Locale("ru")));
         }
         Matcher passwordematch = p.matcher(password);

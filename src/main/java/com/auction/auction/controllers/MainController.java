@@ -41,7 +41,7 @@ public class MainController {
     @GetMapping("/auction/home")
     public String HomePage(Model model,
                            @PageableDefault(sort = {"id"},direction = Sort.Direction.DESC) Pageable pageable) {
-                Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
+        Page<Lot> lotsPages = lotService.activeLotsPage(pageable);
         model.addAttribute("lots", lotsPages);
 
 

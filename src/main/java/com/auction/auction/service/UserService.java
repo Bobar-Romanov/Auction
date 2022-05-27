@@ -70,14 +70,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User findUserById(Long userId) {
-        Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
-    }
 
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
 
 
     public boolean saveUser(User user) {
@@ -95,13 +88,7 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean deleteUser(Long userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
-    }
+
 
     public boolean activateUser(String code) {
         User user = userRepository.findByActivationCode(code);
